@@ -1,0 +1,36 @@
+<div class="ngdialog-message">
+	<h2>{{attachment.attachment.title}}</h2>
+	<div ng-if="attachmentPdf">
+		<embed ng-src="{{content}}" width="100%" height="100%"></embed>
+	</div>
+	<div ng-if="attachmentUrl">
+		<embed-video data-ng-href="{{attachment.attachment.url}}" controls="0" width="100%" height="100%">
+			<a ng-href="{{attachment.attachment.url}}">Watch</a>
+		</embed-video>
+	</div>
+	<div ng-if="attachmentVideo">
+		<div class="videogular-container">
+			<videogular vg-theme="config.theme">
+				<vg-media vg-src="config.sources"></vg-media>
+	 			<vg-controls>
+					<vg-play-pause-button></vg-play-pause-button>
+					<!-- <vg-time-display>{{ currentTime | date: 'mm:ss' }}</vg-time-display> -->
+					<vg-scrub-bar>
+						<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+					</vg-scrub-bar>
+					<!-- <vg-time-display>{{ timeLeft | date: 'mm:ss' }}</vg-time-display> -->
+					<vg-volume>
+						<vg-mute-button></vg-mute-button>
+						<vg-volume-bar></vg-volume-bar>
+					</vg-volume>
+					<vg-fullscreen-button></vg-fullscreen-button>
+				</vg-controls>
+				<vg-overlay-play></vg-overlay-play>
+			</videogular>
+		</div>
+	</div>
+	<div ng-if="attachmentImage">
+		<img class="img-responsive" ng-src="/attachments/{{attachment.attachment.file}}">
+	</div>
+</div>
+<div class="ngdialog-close"></div>

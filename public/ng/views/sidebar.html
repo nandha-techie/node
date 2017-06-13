@@ -1,0 +1,56 @@
+<div class="page-sidebar-wrapper">
+	<div class="page-sidebar navbar-collapse collapse">
+		<ul class="page-sidebar-menu page-header-fixed page-sidebar-menu-hover-submenu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+			<li ng-class="dashboardTab() ? 'nav-item start active open' : 'nav-item start'">
+				<a href="#/" class="nav-link nav-toggle">
+					<i class="icon-home"></i>
+					<span class="title">Dashboard</span>
+					<span ng-class="dashboardTab() ? 'selected' : ''"></span>
+				</a>
+			</li>
+			<li ng-class="libraryTab() ? 'nav-item active open' : 'nav-item'">
+				<a href="#/library" class="nav-link nav-toggle">
+					<i class="icon-bar-chart"></i>
+					<span class="title">Bibliothèque</span>
+					<span ng-class="libraryTab() ? 'selected' : ''"></span>
+				</a>
+			</li>
+			<li ng-class="participantTab() ? 'nav-item active open' : 'nav-item'">
+				<a href="#/participants" class="nav-link nav-toggle">
+					<i class="icon-user"></i>
+					<span class="title">Participants</span>
+					<span class="noty-count" ng-if="activeLogin > 0">{{activeLogin}}</span>
+					<span ng-class="participantTab() ? 'selected' : ''"></span>
+				</a>
+			</li>
+			<li ng-class="liveTab() ? 'nav-item active open' : 'nav-item'">
+				<a href="#/{{urlPath}}" class="nav-link nav-toggle">
+					<i class="icon-feed"></i>
+					<span class="title">Live</span>
+					<span ng-class="liveTab() ? 'selected' : ''"></span>
+				</a>
+			</li>
+			<li ng-class="reportTab() ? 'nav-item active open' : 'nav-item'">
+				<a href="#/report" class="nav-link nav-toggle">
+					<i class="icon-bar-chart"></i>
+					<span class="title">Rapports</span>
+					<span ng-class="reportTab() ? 'selected' : ''"></span>
+				</a>
+			</li>
+			<li ng-class="preferencesTab() ? 'nav-item active open' : 'nav-item'">
+				<a href="#/preferences" class="nav-link nav-toggle">
+					<i class="icon-settings"></i>
+					<span class="title">Outils & préférences</span>
+					<span ng-class="preferencesTab() ? 'selected' : ''"></span>
+				</a>
+			</li>
+			<!-- <li ng-class="categoryTab() ? 'nav-item active open' : 'nav-item'">
+				<a href="#/category" class="nav-link nav-toggle">
+					<i class="icon-list"></i>
+					<span class="title">Categories</span>
+					<span ng-class="categoryTab() ? 'selected' : ''"></span>
+				</a>
+			</li> -->
+		</ul> 
+	</div>
+</div>

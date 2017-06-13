@@ -1,0 +1,273 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Outils & Préférences - </small> Préférences
+		</h3>
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="portlet tab-left light thin-border">
+					<div class="portlet-title tabbable-line">
+						<ul class="nav nav-tabs col-xs-12 col-sm-4 col-lg-6">
+							<li class="active">
+								<a data-target="#tab_1_2" class="active" data-toggle="tab">Outils</a>
+							</li>
+							<li>
+								<a data-target="#tab_1_1" data-toggle="tab">Préférences</a>
+							</li>
+							<li>
+								<a data-target="#tab_1_3" data-toggle="tab">Catégories</a>
+							</li>
+						</ul>
+					</div>
+					<div class="portlet-body">
+						<div class="tab-content"> <!--BEGIN TABS-->
+							<div class="tab-pane" id="tab_1_1">
+								<div class="form-wrapper">
+									<form class="form-horizontal h-form" name="infoForm" ng-submit="update(infoForm, data)" novalidate>
+										<div class="form-group">
+											<label for="title" class="col-sm-2 control-label">
+												Site Title <span class="mandatory">&#42;</span>
+											</label>
+											<div ng-class="(isEmpty(infoForm.infoTitle.$error) && infoForm.infoTitle.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<input type="text" ng-model="data.title" ng-minlength="3" name="infoTitle" class="form-control" id="title" placeholder="Title" required/>
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="metakey" class="col-sm-2 control-label">
+												Meta Key <span class="mandatory">&#42;</span>
+											</label>
+											<div ng-class="(isEmpty(infoForm.infoMetakey.$error) && infoForm.infoMetakey.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<input type="text" ng-model="data.metakey" ng-minlength="3" name="infoMetakey" class="form-control" id="metakey" placeholder="Meta Key" required/>
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="metadescription" class="col-sm-2 control-label">
+												Meta Description <span class="mandatory">&#42;</span>
+											</label>
+											<div ng-class="(isEmpty(infoForm.infoMetaDescription.$error) && infoForm.infoMetaDescription.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<input type="text" ng-model="data.metadescription" ng-minlength="3" name="infoMetaDescription" class="form-control" id="metadescription" placeholder="Meta Description" required/>
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lang" class="col-sm-2 control-label">Privacy</label>
+											<div ng-class="(isEmpty(infoForm.participantLogin.$error) && infoForm.participantLogin.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<label class="control-label">
+													<input type="radio" id="radio_1" ng-value="0" name="answer" ng-model="data.participantLogin" /> Public
+												</label>
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"></label>
+											<div ng-class="(isEmpty(infoForm.participantLogin.$error) && infoForm.participantLogin.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<label class="control-label">
+													<input type="radio" id="radio_2" ng-value="1" name="answer" ng-model="data.participantLogin" /> PIN
+												</label>
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"></label>
+											<div class="col-sm-6 marginlt15 has-feedback">
+												<div aria-label="Toolbar with button groups" role="toolbar" class="row pin-warp">
+													<div aria-label="First group" role="group" class="btn-group col-xs-12 col-sm-6 col-md-7 no-hover">
+														<button class="btn btn-default col-md-3 col-xs-3" type="button">{{pins[0]}}</button>
+														<button class="btn btn-default col-md-3 col-xs-3" type="button">{{pins[1]}}</button>
+														<button class="btn btn-default col-md-3 col-xs-3" type="button">{{pins[2]}}</button>
+														<button class="btn btn-default col-md-3 col-xs-3" type="button">{{pins[3]}}</button>
+													</div>
+													<div aria-label="Second group" role="group" class="btn-group col-xs-12 col-sm-6 col-md-5">
+														<button class="btn btn-default col-md-6 col-xs-6" type="button" ng-click="GeneratePIN()">Generate</button>
+														<button class="btn btn-default col-md-6 col-xs-6" type="button" ng-click="ClearPIN()">Clear</button>
+													</div>
+												</div>
+												<small class="help-block">If set, only those with access to the PIN will be able to access your meeting.</small>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lang" class="col-sm-2 control-label"></label>
+											<div ng-class="(isEmpty(infoForm.participantLogin.$error) && infoForm.participantLogin.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<label class="control-label">
+													<input type="radio" id="radio_3" ng-value="2" name="answer" ng-model="data.participantLogin" /> Login and Password
+												</label>
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="logo" class="col-sm-2 control-label">Logo</label>
+											<div ng-class="(isEmpty(infoForm.infoLogo.$error) && infoForm.infoLogo.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+												<input type="file" ng-file-select ng-model="files" name="infoLogo" class="form-control" accept="image/png, image/jpg" onchange="angular.element(this).scope().imageHandler(this.files[0])" id="logo" />
+												<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+												<small class="help-block">Image should less than 1 MB</small>
+											</div>
+											<div aria-label="Toolbar with button groups" role="toolbar" class="row pin-warp" ng-if=" data.logo != '/assets/images/logo-3.png' ">
+												<div aria-label="Second group" role="group" class="btn-group col-sm-3">
+													<button class="btn btn-default col-md-4" type="button" ng-click="removeLogo()">Clear</button>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"></label>
+											<div class="col-sm-6">
+												<div class="col-sm-3">
+													<a href="{{origin}}{{data.logo}}" target="_blank">{{data.file}}</a>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-6">
+												<button type="submit" class="btn green width100">Submit</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="tab-pane active" id="tab_1_2">
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="portlet light">
+											<div class="portlet-title tabbable-line">
+												<div class="caption">
+													<span class="caption-subject font-blue uppercase">Version</span>
+												</div>
+											</div>
+											<div class="portlet-body">
+												<div class="min100 server-info">
+													<h3>Current Version: <span>{{version.number}}</span></h3>
+													<h4>Last update: {{version.formatDate}}</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="portlet light">
+											<div class="portlet-title tabbable-line">
+												<div class="caption">
+													<span class="caption-subject font-blue uppercase">Student Access</span>
+												</div>
+											</div>
+											<div class="portlet-body">
+												<div class="min100 server-info">
+													<h3></h3>
+													<a class="btn green uppercase pull-right" href="/moderator/qrcode" target="_balnk">
+														<i class="fa fa-search"></i> Student Access
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="portlet light">
+											<div class="portlet-title tabbable-line">
+												<div class="caption">
+													<span class="caption-subject font-blue uppercase">SERVEUR INFO</span>
+												</div>
+											</div>
+											<div class="portlet-body">
+												<div class="min100 server-info">
+													<h3>Serveur en ligne</h3>
+													<h4>Dernière synchronisation : 21/03/2016 – 09:42</h4>
+													<button class="btn green uppercase">SYNC</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="portlet light">
+											<div class="portlet-title tabbable-line">
+												<div class="caption">
+													<span class="caption-subject font-blue uppercase">Reports</span>
+												</div>
+											</div>
+											<div class="portlet-body">
+												<div class="min100 server-info">
+													<h3>Interactions</h3>
+													<h4>Total no.of Session : {{interaction}}</h4>
+													<button class="btn green uppercase" ng-click="exportReports();" ng-disabled="interaction <= 0">Export</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="tab_1_3">
+								<div class="row">
+									<div class="col-md-12">
+										<!-- BEGIN EXAMPLE TABLE PORTLET-->
+										<div class="portlet light thin-border">
+											<div class="portlet-title">
+												<div class="caption font-dark">
+													<div class="btn-group">
+														<a class="btn btn-sm green btn-outline btn-circle btn-small" href="#/category/new">
+															<i class="fa fa-plus"></i> Add
+														</a>
+													</div>
+												</div>
+											</div>
+											<div class="portlet-body table-responsive padd25">
+												<table class="table table-bordered order-column participant-table" id="sample_1">
+													<thead>
+														<tr>
+															<th>Name</th>
+															<th>Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat="(index, category) in categories">
+															<td>{{category.name}}</td>
+															<td>
+																<a ng-href="#/category/{{category._id}}" class="btn btn-icon-only blue">
+																	<i class="fa fa-edit"></i>
+																</a>
+																<a ng-click="deleteDialog(category._id, index)" class="btn btn-icon-only red">
+																	<i class="fa fa-times"></i>
+																</a>
+															</td>
+														</tr>
+														<tr class="text-center" ng-if="categories.length <= 0">
+															<td colspan="9">No Results Found</td>
+														</tr>
+													</tbody>
+												</table>
+												<div class="row">
+													<div class="col-md-5 col-sm-5"></div>
+													<div class="col-md-7 col-sm-7">
+														<div class="row">
+															<div class="custom-pagination">
+																<ul class="pagination" style="visibility: visible;">
+																	<li ng-class="(currentPage == 1) ? 'prev disabled' : 'prev'">
+																		<a title="Prev" ng-click="(currentPage != 1) && pagination(pages[currentPage - 2].number)">
+																			<i class="fa fa-angle-left"></i>
+																		</a>
+																	</li>
+																	<li ng-repeat="(key, page) in pages" ng-class="(currentPage == page.number) ? 'active' : ''"  ng-click="pagination(page.number)">
+																		<a>{{page.number}}</a>
+																	</li>
+																	<li ng-class="(currentPage == pages[pages.length - 1].number) ? 'next disabled' : 'next'">
+																		<a title="Next" ng-click="(currentPage != pages[pages.length - 1].number) && pagination(pages[currentPage].number)">
+																			<i class="fa fa-angle-right"></i>
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- END EXAMPLE TABLE PORTLET-->
+									</div>
+								</div>
+							</div>
+						</div> <!--END TABS-->
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</div>

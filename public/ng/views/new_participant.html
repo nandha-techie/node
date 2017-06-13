@@ -1,0 +1,120 @@
+	<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Participants - </small> Nouveau participant
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->							 
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark"></div>
+					</div>
+					<div class="portlet-body padd25">
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="newParticipantForm" ng-submit="create(newParticipantForm, participantData);" novalidate>
+								<div class="form-group">
+									<label for="quizFirstName" class="col-sm-2 control-label">
+										First Name 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="participantData.firstname" id="quizFirstName" name="quizFirstName" class="form-control" placeholder="First Name" required ng-minlength="2" ng-maxlength="25"/>
+										<div ng-show="newParticipantForm.quizFirstName.$touched" ng-messages="newParticipantForm.quizFirstName.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">2 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="quizLastName" class="col-sm-2 control-label">
+										Last Name 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="participantData.lastname" id="quizLastName" name="quizLastName" class="form-control" placeholder="Last Name" required ng-minlength="2" ng-maxlength="25"/>
+										<div ng-show="newParticipantForm.quizLastName.$touched" ng-messages="newParticipantForm.quizLastName.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">2 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="email" class="col-sm-2 control-label">
+										E-mail 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="email" ng-model="participantData.email" placeholder="Email" name="email" class="form-control" id="email" required ng-minlength="2"/>
+										<div ng-show="newParticipantForm.email.$touched" ng-messages="newParticipantForm.email.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="email">Enter Valid Email</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-sm-2 control-label">
+										Password
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="password" required ng-model="participantData.password" name="leaderPassword" class="form-control" id="password" placeholder="Password" ng-minlength="8" ng-maxlength="25" />
+										<div ng-show="newParticipantForm.leaderPassword.$touched" ng-messages="newParticipantForm.leaderPassword.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">8 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="confirmPwd" class="col-sm-2 control-label">
+										Confirm Password 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="password" required ng-model="participantData.password_confirmation" name="confirmPwd" class="form-control" id="confirmPwd" placeholder="Password Confirmation" ng-minlength="8" ng-maxlength="25" match="newParticipantForm.leaderPassword" />
+										<div ng-show="newParticipantForm.confirmPwd.$touched" ng-messages="newParticipantForm.confirmPwd.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">8 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+											<div ng-message="match">Password Not Match</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="quizOrganisation" class="col-sm-2 control-label">Organisation</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="participantData.organisation" name="quizOrganisation" class="form-control" id="organisation" placeholder="Organisation" />
+										<div ng-show="newParticipantForm.quizOrganisation.$touched" ng-messages="newParticipantForm.quizOrganisation.$error" class="error-text" role="alert">
+											<div ng-message="required">Please Enter Organisation</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="quizLang" class="col-sm-2 control-label">Language</label>
+									<div class="col-sm-6">
+										<select class="form-control" ng-model="participantData.language" id="quizLang" name="quizLang" required>
+											<option value="en">English</option>
+											<option value="fr">French</option>
+										</select>
+										<div ng-show="newParticipantForm.quizLang.$touched" ng-messages="newParticipantForm.quizLang.$error" class="error-text" role="alert">
+											<div ng-message="required">Please Select Language</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-6">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a href="#/participants" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

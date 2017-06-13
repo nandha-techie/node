@@ -1,0 +1,33 @@
+<div class="ngdialog-message">
+	<div class="portlet light">
+		<div class="portlet-title">
+			<div class="caption font-dark">Importer</div>
+		</div>
+		<div class="portlet-body">
+			<div class="form-wrapper">
+				<form class="form-horizontal h-form" name='importForm' novalidate ng-submit="import(importForm, data);">
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">File
+							<span class="mandatory">*</span>
+						</label>
+						<div ng-class="uploadfiles.$error ||  (isEmpty(importForm.importFile.$error) && importForm.importFile.$touched) ? 'col-sm-8 has-feedback has-error' : 'col-sm-8 has-feedback'">
+							<input name="importFile" type="file" ng-file-select ng-model="files" class="form-control" accept=".aef" onchange="angular.element(this).scope().imageHandler(this.files[0])" />
+							<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-12">
+							<button type="submit" class="btn green width100">Submit</button>
+							<button type="button" ng-click="closeDialog()" class="btn default width100">Cancel</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="ngdialog-buttons mt">
+	<button ng-click="closeDialog()" class="ngdialog-button ngdialog-button-secondary" style="color: #fff;background-color: #4FCCD9;border-color: #4FCCD9;" type="button">Delete</button>
+	<button ng-click="closeDialog()" class="ngdialog-button ngdialog-button-secondary" type="button">Close</button>
+</div> -->
+<div class="ngdialog-close"></div>

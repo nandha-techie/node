@@ -1,0 +1,41 @@
+<div class="logo">
+	<img src="/assets/images/logo-5.png" alt="Logo"/>
+</div>
+<div class="content student">
+	<form name="loginForm" ng-submit="loginByPin(loginForm, data)" novalidate>
+		<h3 class="form-title font-green">{{roomCode}}</h3>
+		<div class="form-group">
+			<div class="row">
+				<div ng-class="(isEmpty(loginForm.pin1.$error) && loginForm.pin1.$touched) ? 'col-md-3 col-sm-3 col-xs-3 full-width field-error' : 'col-md-3 col-sm-3 col-xs-3 full-width'">
+					<input class="form-control form-control-solid placeholder-no-fix text-center" type="password" ng-minlength="1" ng-maxlength="1" custom ng-model="data.pin1" name="pin1" required/>
+				</div>
+				<div ng-class="(isEmpty(loginForm.pin2.$error) && loginForm.pin2.$touched) ? 'col-md-3 col-sm-3 col-xs-3 full-width field-error' : 'col-md-3 col-sm-3 col-xs-3 full-width'">
+					<input class="form-control form-control-solid placeholder-no-fix text-center" type="password" ng-minlength="1" ng-maxlength="1" custom ng-model="data.pin2" name="pin2" required/>
+				</div>
+				<div ng-class="(isEmpty(loginForm.pin3.$error) && loginForm.pin3.$touched) ? 'col-md-3 col-sm-3 col-xs-3 full-width field-error' : 'col-md-3 col-sm-3 col-xs-3 full-width'">
+					<input class="form-control form-control-solid placeholder-no-fix text-center" type="password" ng-minlength="1" ng-maxlength="1" custom ng-model="data.pin3" name="pin3" required/>
+				</div>
+				<div ng-class="(isEmpty(loginForm.pin4.$error) && loginForm.pin4.$touched) ? 'col-md-3 col-sm-3 col-xs-3 full-width field-error' : 'col-md-3 col-sm-3 col-xs-3 full-width'">
+					<input class="form-control form-control-solid placeholder-no-fix text-center" type="password" ng-minlength="1" ng-maxlength="1" custom ng-model="data.pin4" name="pin4" required/>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Email</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="email" placeholder="Email" name="userEmail" ng-model="data.email" required /> 
+			<div ng-show="loginForm.userEmail.$touched" ng-messages="loginForm.userEmail.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="email">Enter Valid Email</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="remember-me"><input type="checkbox" name="remember" value="1" />Remember </label>
+		</div>
+		<div class="form-button-group">
+			<div class="button-right">
+				<button type="submit" class="btn green uppercase">Login</button>
+				<button class="btn btn-outline uppercase" ng-click="goBack()">Back</button>
+			</div>
+		</div>	 
+	</form>
+</div>

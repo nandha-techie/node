@@ -1,0 +1,152 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> Create Question
+		</h3>
+		<div class="portlet light thin-border">
+			<div class="portlet-title">
+				<div class="caption font-dark">
+					<div class="btn-group">
+						<a class="btn br4 btn-sm btn-primary btn-small" href="#/library">Aller à la biblioth&#232;que</a>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body padd25">
+				<div class="form-wrapper">
+					<form class="form-horizontal h-form" name="newQuestionForm" ng-submit="create(newQuestionForm, questionData);" novalidate>
+						<div class="form-group">
+							<label for="question" class="col-sm-3 col-md-2 control-label">Question
+								<span class="mandatory">&#42;</span>
+							</label>
+							<div ng-class="(isEmpty(newQuestionForm.questionName.$error) && newQuestionForm.questionName.$touched) ? 'col-sm-8 col-md-7 has-feedback has-error' : 'col-sm-8 col-md-7 has-feedback'">
+								<input type="text" class="form-control" ng-model="questionData.name" name="questionName" id="question" required placeholder="question sans titre">
+								<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="title" class="col-sm-3 col-md-2 control-label">Texte de consigne</label>
+							<div class="col-sm-8 col-md-7">
+								<input type="text" class="form-control" id="title" ng-model="questionData.feedback">
+							</div>
+						</div>
+						<div class="form-group" ng-if="questionData.type != 'free' && questionData.type != 'blank'">
+							<label for="title" class="col-sm-3 col-md-2 control-label">Randomize Options</label>
+							<div class="col-sm-8 col-md-7">
+								<input type="checkbox" name="random" ng-model="questionData.random" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="timelimit" class="col-sm-3 col-md-2 control-label">Time Limit</label>
+							<div ng-class="(isEmpty(newQuestionForm.timelimit.$error) && newQuestionForm.timelimit.$touched) ? 'col-sm-7 col-md-5 has-feedback has-error' : 'col-sm-7 col-md-5 has-feedback'">
+								<input type="number" ng-model="questionData.timelimit" name="timelimit" class="form-control" id="timelimit" required ng-readonly="questionData.notimelimit == '1'"/>
+								<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+							</div>
+							<div class="col-sm-2 col-md-5">
+								<input type="checkbox" name="notimelimit" value="1" ng-model="questionData.notimelimit" icheck/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-3 col-md-2 control-label"></div>
+							<div class="col-sm-8 col-md-5">
+								<button type="button" ng-click="getMedia()" class="btn btn-success">Add Media</button>
+							</div>
+						</div>
+						<div class="form-group" ng-repeat="(index, singleMedia) in media">
+							<div class="col-sm-3 col-md-2 control-label"></div>
+							<div class="col-sm-3 col-md-4 uploaded-file">
+								<img class="img-responsive" ng-src="/attachments/thumbnail/{{singleMedia.attachment.file}}" ng-if="singleMedia.attachment.fileType == 'image'">
+								<img class="img-responsive" ng-src="/attachments/{{singleMedia.attachment.file}}" ng-if="singleMedia.attachment.fileType == 'url'">
+								<div ng-dblclick="openDocument(singleMedia.attachment);" class="document" ng-src="{{singleMedia.attachment.path}}" ng-if="singleMedia.attachment.fileType == 'pdf' || singleMedia.attachment.fileType == 'doc' || singleMedia.attachment.fileType == 'ppt' || singleMedia.attachment.fileType == 'zip' || singleMedia.attachment.fileType == 'video'">{{singleMedia.attachment.title}}</div>
+							</div>
+							<div class="col-sm-3 col-md-2">
+								<button class="btn btn-danger" type="button" ng-click="removeMedia(index)"><i class="fa fa-trash"></i></button>
+							</div>
+						</div>
+						<div class="form-group" ng-if="type == 'free' || type == 'blank'">
+							<label for="answer" class="col-sm-3 col-md-2 control-label">Answer
+								<span class="mandatory">&#42;</span>
+							</label>
+							<div ng-class="(isEmpty(newQuestionForm.questionAnswer.$error) && newQuestionForm.questionAnswer.$touched) ? 'col-sm-8 col-md-7 has-feedback has-error' : 'col-sm-8 col-md-7 has-feedback'">
+								<input type="text" class="form-control" ng-model="questionData.answer[0]" name="questionAnswer" id="answer" ng-required="type == 'free' || type == 'blank'">
+								<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						<div class="form-group" ng-if="type == 'free' || type == 'blank'">
+							<div class="col-sm-3 col-md-2 control-label"></div>
+							<div class="col-sm-8 col-md-7">
+								<div class="form-group mt35">
+									<div class="col-lg-12">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a ng-if="activity" href="#/library/quiz/{{activity.fileId}}/edit" class="btn default width100">Cancel</a>
+										<a ng-if="!activity" href="#/library" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group" ng-if="type != 'free' && type != 'blank'">
+							<!-- <label class="col-sm-3 col-md-2 control-label">Type</label> -->
+							<label class="col-sm-3 col-md-2 control-label"></label>
+							<div class="col-sm-8 col-md-7">
+								<!-- <label class="label-top">
+									<input type="radio" checked/> R&#233;ponse unique
+								</label>
+								<div class="form-group">
+									<div class="col-lg-12">
+										<div class="custom-checkbox">
+											<label> <input type="checkbox"/>Question obligatoire</label>
+										</div>
+									</div>
+								</div> -->
+								<div class="row option-wrap" ng-repeat="(index, option) in questionData.options track by $index">
+									<div class="col-xs-2 col-sm-1 col-md-1">
+										<label class="control-label">
+											<input type="checkbox" id="radio_{{$index}}" ng-value="{{questionData.options[$index]}}" name="answer_{{$index}}" ng-model="checkbox" ng-if="type == 'multiple'" ng-click="updateAnswer($index, checkbox, newQuestionForm);" />
+											<input type="radio" id="radio_{{$index}}" ng-value="{{questionData.options[$index]}}" name="answer" ng-model="radio" ng-if="type != 'multiple'" ng-click="updateAnswer1($index, newQuestionForm);" />
+										</label>
+									</div>
+									<div ng-class="(isEmpty(newQuestionForm.option_{{index}}.$error) && newQuestionForm.option_{{index}}.$touched) ? 'col-xs-10 col-sm-6 col-md-7 has-feedback has-error' : 'col-xs-10 col-sm-6 col-md-7 has-feedback'">
+										<input type="text" class="form-control" name="option_{{index}}" required ng-readonly="type == 'truefalse'" ng-model="questionData.options[$index]"/>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+									<div class="col-xs-6 col-sm-3 col-md-1">
+										<!-- <button class="btn btn-danger" type="button" ng-hide="questionData.options.length <= 2" ng-click="removeAnswer(index)" ng-if="questionData.type != 'truefalse'">Remove</button> -->
+										<button class="btn btn-danger" type="button" ng-hide="questionData.options.length <= 2" ng-click="removeAnswer(index)" ng-if="questionData.type != 'truefalse'"><i class="fa fa-trash"></i></button>
+									</div>
+									<div class="col-xs-6 col-sm-3 col-md-3">
+										<input data-option-value="{{questionData.options[$index]}}" data-radio-id="{{$index}}" data-option-length="{{questionData.options.length}}" type="radio" id="switch_{{$index}}" class="switch" ng-model="switch" switch ng-if="type != 'multiple'" />
+										<input data-option-value="{{questionData.options[$index]}}" data-radio-id="{{$index}}" type="checkbox" id="switch_{{$index}}" class="switch" ng-model="switch" switch ng-if="type == 'multiple'" />
+									</div>
+								</div>
+								<div class="row option-wrap">
+									<div class="col-xs-12 col-sm-6 col-md-6">
+										<button class="btn btn-outline btn-sm mtb15" ng-if="questionData.type != 'truefalse'" type="button" ng-click="addAnswer()" ng-hide="limitExceed">+ Add Answer</button>
+									</div>
+								</div>
+								<!-- <div class="row option-wrap">
+									<div class="col-xs-2 col-sm-1 col-md-1">
+										<label class="control-label">
+											<input type="radio"/>
+										</label>
+									</div>
+									<div class="col-xs-10 col-sm-6 col-md-6">
+										<input type="text" class="form-control" placeholder="Cliquer pour ajouter une reponse" readonly/>
+									</div>
+									<div class="col-xs-12 col-sm-5 col-md-5">
+										<input type="checkbox" class="switch" ng-model="switch" switch/>
+									</div>
+								</div> -->
+								<div class="form-group mt35">
+									<div class="col-lg-12">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a ng-if="activity" href="#/library/quiz/{{activity.fileId}}/edit" class="btn default width100">Cancel</a>
+										<a ng-if="!activity" href="#/library" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

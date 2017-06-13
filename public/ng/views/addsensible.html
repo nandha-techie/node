@@ -1,0 +1,37 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> Question Sensible Zone
+		</h3>
+		<div class="portlet light thin-border">
+			<div class="portlet-title">
+				<div class="caption font-dark">
+					<div class="btn-group">
+						<a class="btn btn-sm green btn-outline btn-circle btn-small" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu pull-right">
+						 	<li>
+						 		<a href="#/library">
+						 			<i class="fa fa-trash"></i> Cancel
+						 		</a>
+						 	</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body padd25">
+				<div class="form-wrapper">
+					<div class="canvas-wrap" ng-if="view">
+						<img id="image" addsensible ng-src="{{attachment.attachment.path}}"/>
+						<div class="markar-button">
+							<button id="add-markar" ng-click="addMarkar()" type="button" class="btn green btn-outline btn-small">Add markar</button>
+							<button id="save-img" ng-click="saveImage()" type="button" class="btn blue btn-outline btn-small">Save as image</button>
+						</div>
+					</div>
+					<div id="output-img"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

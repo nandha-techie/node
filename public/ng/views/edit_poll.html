@@ -1,0 +1,143 @@
+	<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> Modifier Vote
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->							 
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark">
+							<div class="btn-group custom-popover" ng-if="questions.length <= 0">
+								<a class="btn br4 btn-sm btn-success btn-small" data-container="body" popover data-toggle="popover" data-placement="bottom">
+									Ajouter une question <i class="fa fa-angle-down"></i>
+								</a>
+								<div class="popover-wrap hide">
+									<div class="popover-inner-wrap">
+										<h4>Ajouter une question</h4>
+										<div class="row ques-wrap">
+											<div class="col-sm-6 col-md-6">
+												<ul class="ques-list">
+													<li>
+														<a href="#/library/poll/{{pollData._id}}/question/truefalse/new">
+															<i class="fa fa-dot-circle-o" aria-hidden="true"></i> True False 
+														</a>
+													</li>
+													<li>
+														<a href="#/library/poll/{{pollData._id}}/question/free/new">
+															<i class="fa fa-edit" aria-hidden="true"></i> Short Answer
+														</a>
+													</li>
+												</ul>
+											</div>
+											<div class="col-sm-6 col-md-6">
+												<ul class="ques-list">
+													<li>
+														<a href="#/library/poll/{{pollData._id}}/question/single/new">
+															<i class="fa fa-dot-circle-o" aria-hidden="true"></i> R&#233;ponse unique
+														</a>
+													</li>
+													<li>
+														<a href="#/library/poll/{{pollData._id}}/question/multiple/new">
+															<i class="fa fa-check-square-o" aria-hidden="true"></i> R&#233;ponses multiples
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="btn-group">
+								<a class="btn br4 btn-sm btn-primary btn-small" href="#/library">Aller à la biblioth&#232;que</a>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body padd25">
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="editQuizForm" ng-submit="update(editQuizForm, pollData);" novalidate enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="title" class="col-sm-3 col-md-2 control-label">Name
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(editQuizForm.quizName.$error) && editQuizForm.quizName.$touched) ? 'col-sm-8 col-md-7 has-feedback has-error' : 'col-sm-8 col-md-7 has-feedback'">
+										<input type="text" ng-focus="foucsed = true;" class="form-control" ng-model="pollData.name" name="quizName" id="title" required />
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="category" class="col-sm-3 col-md-2 control-label">Category
+										<!-- <span class="mandatory">&#42;</span> -->
+									</label>
+									<div ng-class="(isEmpty(editQuizForm.quizCategory.$error) && editQuizForm.quizCategory.$touched) ? 'col-sm-8 col-md-7 has-feedback has-error' : 'col-sm-8 col-md-7 has-feedback'">
+										<select class="form-control" ng-model="pollData.categoryId" name="quizCategory" id="category" ng-change="foucsed = true;">
+											<option value="{{category._id}}" ng-repeat="category in categories">{{category.name}}</option>
+										</select>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 col-md-2 control-label"></label>
+									<button type="submit" ng-show="foucsed" class="btn green width100">Update</button>
+								</div>
+							</form>
+							<div class="portlet-body table-responsive padd25">
+								<table class="table table-bordered order-column participant-table" id="sample_1">
+									<thead>
+										<tr>
+											<th>Question</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="(index, question) in questions">
+											<td>{{question.name}}</td>
+											<td>
+												<a ng-href="#/library/poll/{{pollData._id}}/question/{{question._id}}/edit" class="btn btn-icon-only blue">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a ng-click="deleteDialog(question._id, index)" class="btn btn-icon-only red">
+													<i class="fa fa-times"></i>
+												</a>
+											</td>
+										</tr>
+										<tr class="text-center" ng-if="questions.length <= 0">
+											<td colspan="9">No Results Found</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="row">
+									<div class="col-md-5 col-sm-5"></div>
+									<div class="col-md-7 col-sm-7">
+										<div class="row">
+											<div class="pull-right col-sm-12 col-md-10 col-lg-10 text-right">
+												<div class="custom-pagination">
+													<ul class="pagination">
+														<li ng-class="(currentPage == 1) ? 'prev disabled' : 'prev'">
+															<a title="Prev" ng-click="(currentPage != 1) && pagination(pages[currentPage - 2].number)">
+																<i class="fa fa-angle-left"></i>
+															</a>
+														</li>
+														<li ng-repeat="(key, page) in pages" ng-class="(currentPage == page.number) ? 'active' : ''"  ng-click="pagination(page.number)">
+															<a>{{page.number}}</a>
+														</li>
+														<li ng-class="(currentPage == pages[pages.length - 1].number) ? 'next disabled' : 'next'">
+															<a title="Next" ng-click="(currentPage != pages[pages.length - 1].number) && pagination(pages[currentPage].number)">
+																<i class="fa fa-angle-right"></i>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

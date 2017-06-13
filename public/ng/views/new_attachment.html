@@ -1,0 +1,64 @@
+	<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> Nouveau document Vidéo
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->							 
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark">
+							<div class="btn-group">
+								<label for="url" class="col-sm-2 control-label">Type</label>
+							</div>
+							<div class="btn-group">
+								<input type="checkbox" ng-model="documentData.isFile" file-type class="form-control" ng-change="changeFile(documentData.isFile);"/>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body padd25">
+						<h4 class="video-text" ng-show="!documentData.isFile">Copier-Coller l’adresse URL YouTube ou Vimeo de la vidéo</h4>
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="newDocumentForm" ng-submit="create(newDocumentForm, documentData);" novalidate enctype="multipart/form-data">
+								<div class="form-group" ng-if="!documentData.isFile">
+									<label for="url" class="col-sm-2 control-label">URL
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(newDocumentForm.documentUrl.$error) && newDocumentForm.documentUrl.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="url" ng-model="documentData.url" id="url" name="documentUrl" class="form-control" url-input ng-required="!documentData.isFile"/>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group" ng-if="documentData.isFile">
+									<label for="file" class="col-sm-2 control-label">File
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(fileType.error || (isEmpty(newDocumentForm.documentFile.$error) && newDocumentForm.documentFile.$touched)) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input ng-file-select type="file" ng-model="documentData.file" id="file" name="documentFile" class="form-control" ng-required="documentData.isFile"/>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="title" class="col-sm-2 control-label">Titre
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(newDocumentForm.documentTitle.$error) && newDocumentForm.documentTitle.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="text" class="form-control" ng-model="documentData.title" name="documentTitle" id="title" required />
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-6">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a href="#/library" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

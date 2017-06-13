@@ -1,0 +1,60 @@
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner ">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo padd0">
+			<a href="#/">
+				<img ng-src="{{siteinfo.logo}}" alt="logo"/>
+			</a>
+			<!-- <div class="menu-toggler sidebar-toggler"></div> -->
+		</div>
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<div class="page-top">
+			<h3 class="room-name">Room : <span>{{authuser.room.code}}</span></h3>
+			<div class="top-menu">
+				<ul class="nav navbar-nav pull-right">
+					<li class="dropdown dropdown-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+							<img class="img-circle" src="/assets/images/avatar1.png"/>
+							<span class="username username-hide-on-mobile"> {{authuser.name}} </span>
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-default">
+							<li>
+								<a href="#/profile">
+									<i class="icon-user"></i> My Profile
+								</a>
+							</li>
+							<li class="divider"> </li>
+							<li>
+								<a ng-click="lock();">
+									<i class="icon-lock"></i> Lock Screen
+								</a>
+							</li>
+							<li>
+								<a target="_balnk" href="/moderator/qrcode">
+									<i class="fa fa-qrcode"></i> Student Access
+								</a>
+							</li>
+							
+							<li>
+								<a ng-click="openModal();">
+									<i class="icon-key"></i> Clear Room
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown dropdown-extended quick-sidebar-toggler" ng-click="logout();">
+						<span class="sr-only">Toggle Quick Sidebar</span>
+						<i class="icon-logout"></i>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>

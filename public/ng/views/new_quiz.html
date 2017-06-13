@@ -1,0 +1,48 @@
+	<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> Nouveau Quiz
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->							 
+				<div class="portlet light thin-border">
+					<div class="portlet-title"></div>
+					<div class="portlet-body padd25">
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="newQuizForm" ng-submit="create(newQuizForm, quizData);" novalidate enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="title" class="col-sm-2 control-label">Name
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(newQuizForm.quizName.$error) && newQuizForm.quizName.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="text" class="form-control" ng-model="quizData.name" name="quizName" id="title" required />
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="category" class="col-sm-2 control-label">Category
+										<!-- <span class="mandatory">&#42;</span> -->
+									</label>
+									<div ng-class="(isEmpty(newQuizForm.quizCategory.$error) && newQuizForm.quizCategory.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<select class="form-control" ng-model="quizData.category" name="quizCategory" id="category">
+											<option value="{{category._id}}" ng-repeat="category in categories">{{category.name}}</option>
+										</select>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-6">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a ng-if="folder" href="#/library/folder/{{folder.fileId}}" class="btn default width100">Cancel</a>
+										<a ng-if="!folder" href="#/library" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

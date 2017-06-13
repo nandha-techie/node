@@ -1,0 +1,58 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> modifier dossier
+		</h3>
+		<div class="portlet light thin-border">
+			<div class="portlet-title">
+				<div class="caption font-dark">
+					<div class="btn-group">
+						<a class="btn btn-sm green btn-outline btn-circle btn-small" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a ng-click="deleteFolder(folderData);"><i class="icon-trash"></i> Delete</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body padd25">
+				<div class="form-wrapper">
+					<form class="form-horizontal h-form" name="editFolderForm" ng-submit="update(editFolderForm, folderData);" novalidate>
+						<div class="form-group">
+							<label for="folderName" class="col-sm-2 control-label">Nom <span class="mandatory">&#42;</span></label>
+							<div ng-class="(isEmpty(editFolderForm.folderName.$error) && editFolderForm.folderName.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+								<input type="text" ng-model="folderData.name" id="folderName" name="folderName" class="form-control" placeholder="Name" required ng-minlength="2" ng-maxlength="25"/>
+								<!-- <div ng-show="editFolderForm.folderName.$touched" ng-messages="editFolderForm.folderName.$error" class="error-text" role="alert">
+									<div ng-message="required">Enter Above Field</div>
+									<div ng-message="minlength">2 Characters Minimum</div>
+									<div ng-message="maxlength">25 Characters Maximum</div>
+								</div> -->
+								<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="desc" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-6">
+								<textarea class="form-control" rows="5" ng-model="folderData.description" id="desc"></textarea>
+							</div>
+						</div>
+						<!-- <div class="form-group">
+							<label class="col-sm-2 control-label"></label>
+							<span class="col-sm-1" ng-if="folderData.description.length > 0">{{folderData.description.length}}/300</span>
+							<span class="col-sm-1" ng-if="!folderData.description.length">0/300</span>
+						</div> -->
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-6">
+								<button type="submit" class="btn green width100">Submit</button>
+								<a href="#/library" class="btn default width100">Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

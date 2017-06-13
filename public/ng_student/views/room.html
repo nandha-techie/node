@@ -1,0 +1,28 @@
+<div class="logo">
+	<img src="/assets/images/logo-5.png" alt="Logo"/>
+</div>
+<div class="content student">
+	<form name="roomForm" ng-submit="login(roomForm, data)" novalidate>
+		<h3 class="form-title font-green">Sign In</h3>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Room</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="text" placeholder="Room" name="roomCode" ng-model="data.room" ng-minlength="6" ng-maxlength="6" ng-pattern="/^[a-zA-Z0-9]*$/" required capitalize/> 
+			<div ng-show="roomForm.roomCode.$touched" ng-messages="roomForm.roomCode.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="minlength">6 Characters Minimum</div>
+				<div ng-message="maxlength">6 Characters Maximum</div>
+				<div ng-message="pattern">Enter Valid Room</div>
+			</div>
+		</div>
+		<!-- <div class="form-group">
+			<label class="remember-me">
+				<input type="checkbox" name="remember" value="1" />Remember 
+			</label>
+		</div> -->
+		<div class="form-button-group">
+			<div class="button-right">
+				<button  type="submit" class="btn green uppercase">Next</button>
+			</div>
+		</div>	 
+	</form>
+</div>

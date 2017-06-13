@@ -1,0 +1,46 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Reports - </small> Activity Summary
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light thin-border">
+					<div class="portlet-body table-responsive padd25">
+						<table class="table table-bordered order-column participant-table" id="sample_1">
+							<thead>
+								<tr>
+									<th>Question</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="(index, question) in questions">
+									<td>{{question.name}}</td>
+									<td>
+										<a ng-href="#/report/{{report._id}}/summary/{{question._id}}" class="btn btn-icon-only blue">
+											<i class="fa fa-search"></i>
+										</a>
+									</td>
+								</tr>
+								<tr class="text-center" ng-if="questions.length <= 0">
+									<td colspan="9">No Results Found</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="portlet-title">
+						<ul class="nav nav-tabs col-xs-12 col-sm-4 col-lg-6"></ul>
+						<div class="col-xs-12 col-sm-8 col-lg-6">
+							<div class="right-side clearfix">
+								<div class="left">
+									<a href="#/report" class="btn uppercase btn-outline">Report</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

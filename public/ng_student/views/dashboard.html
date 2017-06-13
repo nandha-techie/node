@@ -1,0 +1,57 @@
+<div class="main-wrapper" ng-if="activities.length <= 0 && !result">
+	<div class="info-wrapper">Waiting for your teacher to start an activity.</div>
+</div>
+
+<div class="main-wrapper" ng-if="result">
+	<div class="chart-wrapper">
+		<h2 ng-if="!activity.categoryId">{{question.name}}</h2>
+		<h2 ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h2>
+		<ul class="scale-list">
+			<li ng-repeat="(index, option) in question.options">
+				<span style="background-color: {{colors[index]}}"></span> {{ (question.type == 'free') ? option._id : option.value }}
+			</li>
+			<li ng-if="notAnswerd">
+				<span style="background-color: {{colors[26]}}"></span> N/A
+			</li>
+		</ul>
+		<div class="canvas-holder">
+			<canvas chart-area id="chart-area" width="500" height="500"/>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="width-medium" ng-if="result">
+	<div class="main-wrapper padd-top25">
+		<h5 class="text-center1 letter-large-22 mt20 text-gray">{{question.name}}</h5>
+		<div class="row row7 mb10" ng-repeat="(key, option) in question.options track by $index" ng-if="question.type != 'free_field'">
+			<div class="col-xs-2 col-sm-2 padd7">
+				<label class="ques-label w45">{{alphabets[key]}}</label>
+			</div>
+			<div class="col-xs-10 col-sm-10 paddleft-0">
+				<div class="progress">
+					<span class="pull-right progress-val">{{ (option.count/count) * 100 | decimalFormat }} %</span>
+					<div class="progress-bar" ng-class="(option.correct) ? 'progress-bar-success' : 'progress-bar-danger'" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{ (count > 0) ? ((option.count/count) * 100) : 0 }}%;"></div>
+					<span class="pull-left progress-val1">{{option.value}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="row row7 mb10" ng-repeat="(key, option) in question.options track by $index" ng-if="question.type == 'free_field'">
+			<div class="col-xs-2 col-sm-2 padd7">
+				<label class="ques-label w45">{{alphabets[key]}}</label>
+			</div>
+			<div class="col-xs-10 col-sm-10 paddleft-0">
+				<div class="progress">
+					<span class="pull-right progress-val">{{ (option.count/count) * 100 | decimalFormat }} %</span>
+					<div class="progress-bar" ng-class="(option.correct) ? 'progress-bar-success' : 'progress-bar-danger'" role="progressbar" aria-valuenow="{{(option.count/count) * 100}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{ (count > 0) ? ((option.count/count) * 100) : 0 }}%;"></div>
+					<span class="pull-left progress-val1">{{option._id}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="mb10" ng-if="notAnswerd">
+			<div class="progress progress-custom">
+				<span class="pull-right progress-val">{{ (notAnswerd.count/count) * 100 | decimalFormat }} %</span>
+				<div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="{{(notAnswerd.count/count) * 100}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{(notAnswerd.count/count) * 100}}%;">N/A</div>
+			</div>
+		</div>
+	</div>
+</div> -->

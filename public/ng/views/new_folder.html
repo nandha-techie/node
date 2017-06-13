@@ -1,0 +1,48 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque - </small> Nouveau dossier
+		</h3>
+		<div class="portlet light thin-border">
+			<div class="portlet-title">
+				<div class="caption font-dark"></div>
+			</div>
+			<div class="portlet-body padd25">
+				<div class="form-wrapper">
+					<form class="form-horizontal h-form" name="newFolderForm" ng-submit="create(newFolderForm, folderData);" novalidate>
+						<div class="form-group">
+							<label for="folderName" class="col-sm-2 control-label">Nom <span class="mandatory">&#42;</span></label>
+							<div ng-class="(isEmpty(newFolderForm.folderName.$error) && newFolderForm.folderName.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+								<input type="text" ng-model="folderData.name" id="folderName" name="folderName" class="form-control" placeholder="Name" required ng-minlength="2" ng-maxlength="25"/>
+								<!-- <div ng-show="newFolderForm.folderName.$touched" ng-messages="newFolderForm.folderName.$error" class="error-text" role="alert">
+									<div ng-message="required">Enter Above Field</div>
+									<div ng-message="minlength">2 Characters Minimum</div>
+									<div ng-message="maxlength">25 Characters Maximum</div>
+								</div> -->
+								<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="desc" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-6">
+								<textarea class="form-control" rows="5" ng-model="folderData.description" id="desc" maxlength="300"></textarea>
+							</div>
+						</div>
+						<!-- <div class="form-group">
+							<label class="col-sm-2 control-label"></label>
+							<span class="col-sm-1" ng-if="folderData.description.length > 0">{{folderData.description.length}}/300</span>
+							<span class="col-sm-1" ng-if="!folderData.description.length">0/300</span>
+						</div> -->
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-6">
+								<button type="submit" class="btn green width100">Submit</button>
+								<a ng-if="folder" href="#/library/folder/{{folder.fileId}}" class="btn default width100">Cancel</a>
+								<a ng-if="!folder" href="#/library" class="btn default width100">Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

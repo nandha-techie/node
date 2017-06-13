@@ -1,0 +1,6 @@
+sudo apt-get install build-essential python2.7 imagemagick
+sudo aptitude install poppler-utils
+sudo add-apt-repository ppa:coolwanglu/pdf2htmlex
+sudo apt-get update
+sudo apt-get install fontforge pdf2htmlex
+sudo apt-get install unoconv libpixman-1-dev libcairo2-dev libpangocairo-1.0-0 libpango1.0-dev libgif-dev  libjpeg-dev node-gyp p7zip-full

@@ -1,0 +1,74 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Categories - </small> Liste des Categories
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN EXAMPLE TABLE PORTLET-->
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark">
+							<div class="btn-group">
+								<a class="btn btn-sm green btn-outline btn-circle btn-small" href="#/category/new">
+									<i class="fa fa-plus"></i> Add
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body table-responsive padd25">
+						<table class="table table-bordered order-column participant-table" id="sample_1">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="(index, category) in categories">
+									<td>{{category.name}}</td>
+									<td>
+										<a ng-href="#/category/{{category._id}}" class="btn btn-icon-only blue">
+											<i class="fa fa-edit"></i>
+										</a>
+										<a ng-click="deleteDialog(category._id, index)" class="btn btn-icon-only red">
+											<i class="fa fa-times"></i>
+										</a>
+									</td>
+								</tr>
+								<tr class="text-center" ng-if="categories.length <= 0">
+									<td colspan="9">No Results Found</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-md-5 col-sm-5"></div>
+							<div class="col-md-7 col-sm-7">
+								<div class="row">
+									<div class="custom-pagination">
+										<ul class="pagination" style="visibility: visible;">
+											<li ng-class="(currentPage == 1) ? 'prev disabled' : 'prev'">
+												<a title="Prev" ng-click="(currentPage != 1) && pagination(pages[currentPage - 2].number)">
+													<i class="fa fa-angle-left"></i>
+												</a>
+											</li>
+											<li ng-repeat="(key, page) in pages" ng-class="(currentPage == page.number) ? 'active' : ''"  ng-click="pagination(page.number)">
+												<a>{{page.number}}</a>
+											</li>
+											<li ng-class="(currentPage == pages[pages.length - 1].number) ? 'next disabled' : 'next'">
+												<a title="Next" ng-click="(currentPage != pages[pages.length - 1].number) && pagination(pages[currentPage].number)">
+													<i class="fa fa-angle-right"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE PORTLET-->
+			</div>
+		</div>
+	</div>
+</div>

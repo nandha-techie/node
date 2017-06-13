@@ -1,0 +1,21 @@
+<div class="main-wrapper" ng-if="activities.length <= 0 && !result">
+	<div class="info-wrapper">Waiting for your teacher to start an activity.</div>
+</div>
+
+<div class="main-wrapper" ng-if="result">
+	<div class="chart-wrapper">
+		<h2 ng-if="!activity.categoryId">{{question.name}}</h2>
+		<h2 ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h2>
+		<ul class="scale-list">
+			<li ng-repeat="(index, option) in question.options">
+				<span style="background-color: {{colors[index]}}"></span> {{ (question.type == 'free') ? option._id : option.value }}
+			</li>
+			<li ng-if="notAnswerd">
+				<span style="background-color: {{colors[26]}}"></span> N/A
+			</li>
+		</ul>
+		<div class="canvas-holder">
+			<canvas chart-area id="chart-area" width="500" height="500"/>
+		</div>
+	</div>
+</div>

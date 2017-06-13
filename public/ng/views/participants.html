@@ -1,0 +1,131 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Participants - </small> Liste des participants
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light thin-border"><!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet-title">
+						<div class="caption font-dark">
+							<div class="btn-group">
+								<a class="btn btn-sm green btn-outline btn-circle btn-small" href="#/participants/new">
+									<i class="fa fa-plus"></i> Add
+								</a>
+							</div>
+						</div>
+						<div class="actions">
+							<form name="searchForm" ng-submit="Search(search)">
+								<div class="inputs">
+									<div class="portlet-input input-inline input-small">
+										<div class="input-group">
+											<input type="text" class="form-control radiustb" placeholder="Search..." ng-model="search" update-search>
+											<span class="input-group-btn">
+												<button class="btn btn-default radiustb" type="submit"><i class="icon-magnifier"></i></button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="portlet-body table-responsive padd25">
+						<table class="table table-bordered order-column participant-table" id="sample_1">
+							<thead>
+								<tr>
+									<th>
+										<a ng-click="sortType = 'firstname'; sortReverse = !sortReverse">First Name 
+											<span ng-show="sortType == 'firstname' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'firstname' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a ng-click="sortType = 'lastname'; sortReverse = !sortReverse">Last Name 
+											<span ng-show="sortType == 'lastname' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'lastname' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a ng-click="sortType = 'organisation'; sortReverse = !sortReverse">Organisation 
+											<span ng-show="sortType == 'organisation' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'organisation' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a ng-click="sortType = 'email'; sortReverse = !sortReverse">Email 
+											<span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="(index, participant) in participants | orderBy:sortType:sortReverse" ng-class="{ 'text-green': participant.logIn, 'text-danger': !participant.status }">
+									<td>{{participant.firstname}}</td>
+									<td>{{participant.lastname}}</td>
+									<td>{{participant.organisation}}</td>
+									<td><a href="/moderator/{{participant._id}}/asparticipant">
+										<span class="text-blue">{{participant.email}}</span>
+									</a></td>
+									<td class="action-btns">
+										<a ng-href="#/participants/{{participant._id}}" class="btn btn-outline btn-circle btn-small btn-voilet">
+											<i class="fa fa-edit"></i> Edit
+										</a>
+										<a ng-click="deleteDialog(participant._id, index)" class="btn btn-outline btn-circle btn-small btn-black">
+											<i class="fa fa-trash"></i> Delete
+										</a>
+										<button ng-click="Invite(participant)" class="btn btn-outline btn-circle btn-small btn-voilet">
+											<i class="fa fa-envelope"></i> Email
+										</button>
+									</td>
+								</tr>
+								<tr class="text-center" ng-if="participants.length <= 0">
+									<td colspan="9">No Results Found</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-md-5 col-sm-5">
+								<div class="dataTables_info" id="sample_3_info" role="status" aria-live="polite">Showing {{skip}} to {{record}} of {{total}} records</div>
+							</div>
+							<div class="col-md-7 col-sm-7">
+								<div class="row">
+									<form name="limit">
+										<div class="pull-right col-sm-12 col-md-10 col-lg-10 text-right">
+											<div class="data-filter">
+												<label>
+													Show 
+													<select class="form-control input-sm input-xsmall input-inline" ng-model="limit" update-limit name="limit" ng-change="pagination(page, limit)">
+														<option ng-repeat="limit in limits" value="{{limit.value}}">{{limit.label}}</option>
+													</select>
+												</label>
+											</div>
+											<div class="custom-pagination">
+												<ul class="pagination" style="visibility: visible;">
+													<li ng-class="(currentPage == 1) ? 'prev disabled' : 'prev'">
+														<a title="Prev" ng-click="(currentPage != 1) && pagination(pages[currentPage - 2].number, limit)">
+															<i class="fa fa-angle-left"></i>
+														</a>
+													</li>
+													<li ng-repeat="(key, page) in pages" ng-class="(currentPage == page.number) ? 'active' : ''"  ng-click="(currentPage != page.number) && pagination(page.number, limit)">
+														<a>{{page.number}}</a>
+													</li>
+													<li ng-class="(currentPage == pages[pages.length - 1].number) ? 'next disabled' : 'next'">
+														<a title="Next" ng-click="(currentPage != pages[pages.length - 1].number) && pagination(pages[currentPage].number, limit)">
+															<i class="fa fa-angle-right"></i>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- END EXAMPLE TABLE PORTLET-->
+			</div>
+		</div>
+	</div>
+</div>

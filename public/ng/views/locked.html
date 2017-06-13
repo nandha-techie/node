@@ -1,0 +1,26 @@
+<div class="page-lock">
+	<div class="page-logo">
+		<img src="/assets/images/logo-5.png" alt="Logo"/>
+	</div>
+	<div class="page-body">
+		<div class="lock-head"> Locked </div>
+		<div class="lock-body">
+			<form class="lock-form" name="lockForm" ng-submit="unlock(lockForm, data)" novalidate>
+				<h4>{{authuser.name}}</h4>
+				<div class="form-group">
+					<input class="form-control placeholder-no-fix" type="password" ng-model="data.password" name="leaderPwd" ng-minlength="8" placeholder="Password" name="password" required/>
+					<div ng-show="lockForm.leaderPwd.$touched" ng-messages="lockForm.leaderPwd.$error" class="error-text" role="alert">
+						<div ng-message="required">Enter Above Field</div>
+						<div ng-message="minlength">8 Characters Minimum</div>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn red uppercase">Login</button>
+				</div>
+			</form>
+		</div>
+		<div class="lock-bottom">
+			<a ng-click="confirmLogout();">Not {{authuser.name}}?</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,137 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Participants - </small> Agathe Zepower
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->							 
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark">
+							<div class="btn-group">
+								<a class="btn btn-sm green btn-outline btn-circle btn-small" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu pull-right">
+									<li>
+										<a ng-click="delete(participantData._id)"> 
+											<i class="fa fa-trash"></i>  Delete
+										</a>
+									</li>
+									<li ng-if="participantData.status">
+										<a ng-click="ban()">
+											<i class="fa fa-ban"></i>  Ban
+										</a>
+									</li>
+									<li ng-if="!participantData.status">
+										<a ng-click="permit()">
+											<i class="fa fa-check"></i>  Permit
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body padd25">
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="editParticipantForm" ng-submit="update(editParticipantForm, participantData);" novalidate>
+								<div class="form-group">
+									<label for="quizFirstName" class="col-sm-2 control-label">
+										First Name 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="participantData.firstname" id="quizFirstName" name="quizFirstName" class="form-control" placeholder="First Name" required ng-minlength="2" ng-maxlength="25"/>
+										<div ng-show="editParticipantForm.quizFirstName.$touched" ng-messages="editParticipantForm.quizFirstName.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">2 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="quizLastName" class="col-sm-2 control-label">
+										Last Name 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="participantData.lastname" id="quizLastName" name="quizLastName" class="form-control" placeholder="Last Name" required ng-minlength="2" ng-maxlength="25"/>
+										<div ng-show="editParticipantForm.quizLastName.$touched" ng-messages="editParticipantForm.quizLastName.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">2 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="email" class="col-sm-2 control-label">
+										E-mail 
+										<span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="email" placeholder="Email" ng-model="participantData.email" name="email" class="form-control" id="email" required ng-minlength="2"/>
+										<div ng-show="editParticipantForm.email.$touched" ng-messages="editParticipantForm.email.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="email">Enter Valid Email</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-6">
+										<input type="password" ng-model="participantData.password" name="leaderPassword" class="form-control" id="password" placeholder="Password" ng-minlength="8" ng-maxlength="25" />
+										<div ng-messages="editParticipantForm.leaderPassword.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">8 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="confirmPwd" class="col-sm-2 control-label">Confirm Password</label>
+									<div class="col-sm-6">
+										<input type="password" ng-model="participantData.password_confirmation" name="confirmPwd" class="form-control" id="confirmPwd" placeholder="Password Confirmation" ng-minlength="8" ng-maxlength="25" match="editParticipantForm.leaderPassword" />
+										<div ng-messages="editParticipantForm.confirmPwd.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">8 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+											<div ng-message="match">Password Not Match</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="quizOrganisation" class="col-sm-2 control-label">Organisation</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="participantData.organisation" name="quizOrganisation" class="form-control" id="organisation" placeholder="Organisation" />
+										<div ng-show="newParticipantForm.quizOrganisation.$touched" ng-messages="newParticipantForm.quizOrganisation.$error" class="error-text" role="alert">
+											<div ng-message="required">Please Enter Organisation</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="quizLang" class="col-sm-2 control-label">Language</label>
+									<div class="col-sm-6">
+										<select class="form-control" ng-model="participantData.language" id="quizLang" name="quizLang" required>
+											<option value="en">English</option>
+											<option value="fr">French</option>
+										</select>
+										<div ng-show="editParticipantForm.quizLang.$touched" ng-messages="editParticipantForm.quizLang.$error" class="error-text" role="alert">
+											<div ng-message="required">Please Select Language</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-6">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a href="#/participants" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,93 @@
+<div class="main-wrapper" ng-if="!showQuiz && !questionResult">
+	<div class="info-wrapper">Waiting for teacher</div>
+</div>
+<div class="main-wrapper" ng-if="showQuiz && !questionResult">
+	<div class="info-wrapper ques-blog" ng-if="questionData.type == 'blank' && onShow">
+		<form name="answerForm1" ng-submit="submit(answerForm1, questionData)" class="quiz-form">
+			<div id="quiz-fillblank" quiz-fillblank>
+				<div id="fillblank-text"></div><br>
+				<div id="fillblank-ph"></div>
+			</div>
+			<h3 ng-if="!activity.categoryId">{{question.name}}</h3>
+			<h3 ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h3>
+			<!-- <p class="rating" rating></p> -->
+			<button type="submit" class="btn green">Envoyer</button>
+		</form>
+	</div>
+	<div class="info-wrapper ques-blog" ng-if="questionData.type != 'blank'">
+		<!-- <span>1/3</span> -->
+		<h3 ng-if="!activity.categoryId">{{question.name}}</h3>
+		<h3 ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h3>
+		<form name="answerForm" ng-submit="submit(answerForm, questionData)">
+			<!-- <p class="rating" rating></p> -->
+			<div class="form-group" ng-repeat="(index, media) in question.media">
+				<img ng-dblclick="openDocument(media.attachment);" ng-src="/attachments/thumbnail/{{media.attachment.file}}" ng-if="media.attachment.fileType == 'image'">
+				<embed-video data-ng-href="{{media.attachment.url}}" controls="0" width="100%" height="100%" ng-if="media.attachment.fileType == 'url'">
+					<a ng-href="{{media.attachment.url}}">Watch</a>
+				</embed-video>
+				<embed ng-src="{{media.attachment.path}}" width="100%" height="50%" ng-if="media.attachment.fileType == 'pdf'" controls="0"></embed>
+				<div class="document" ng-dblclick="openDocument(media.attachment);" ng-src="{{media.attachment.path}}" ng-if="media.attachment.fileType == 'doc' || media.attachment.fileType == 'ppt' || media.attachment.fileType == 'zip'">{{media.attachment.title}}</div>
+				<div ng-if="media.attachment.fileType == 'video'" ng-init="config = getAttachment(media.attachment);">
+					<div class="videogular-container text-left">
+						<videogular vg-theme="config.theme">
+							<vg-media vg-src="config.sources"></vg-media>
+				 			<vg-controls>
+								<vg-play-pause-button></vg-play-pause-button>
+								<!-- <vg-time-display>{{ currentTime | date: 'mm:ss' }}</vg-time-display> -->
+								<vg-scrub-bar>
+									<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+								</vg-scrub-bar>
+								<!-- <vg-time-display>{{ timeLeft | date: 'mm:ss' }}</vg-time-display> -->
+								<vg-volume>
+									<vg-mute-button></vg-mute-button>
+									<vg-volume-bar></vg-volume-bar>
+								</vg-volume>
+								<vg-fullscreen-button></vg-fullscreen-button>
+							</vg-controls>
+							<vg-overlay-play></vg-overlay-play>
+						</videogular>
+					</div>
+				</div>
+			</div>
+			<div class="form-group" ng-if="question.type == 'free'">
+				<textarea class="form-control" ng-model="questionData.answers[0]" ng-readonly="!canedit" rows="2"></textarea>
+				<div ng-messages="answerError.$error" class="error-text" role="alert">
+					<div ng-message="required">Please Enter Answer</div>
+				</div>
+			</div>	
+			<div class="form-group" ng-if="question.type != 'free'" ng-repeat="(index, option) in question.options track by $index">
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<label>{{question.options[$index].value}}</label>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<input data-option-value="{{question.options[$index]._id}}" data-radio-id="{{$index}}" data-option-length="{{question.options.length}}" type="radio" id="switch_{{$index}}" class="switch" ng-model="switch" switch-edit ng-if="question.type != 'multiple'" />
+						<input data-option-value="{{question.options[$index]._id}}" data-radio-id="{{$index}}" type="checkbox" id="switch_{{$index}}" class="switch" ng-model="switch" switch-edit ng-if="question.type == 'multiple'" />
+					</div>
+				</div>
+				<div ng-messages="answerError.$error" class="error-text" role="alert">
+					<div ng-message="required">Please Select Answer</div>
+				</div>
+			</div>
+			<button type="submit" class="btn green">Envoyer</button>
+		</form>
+		<label class="control-label" ng-if="canedit && question.timelimit > 0">Time Remaining: {{counter}} Seconds</label>
+	</div>
+</div>
+<div class="main-wrapper" ng-if="questionResult">
+	<div class="chart-wrapper">
+		<h2 ng-if="!activity.categoryId">{{question.name}}</h2>
+		<h2 ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h2>
+		<ul class="scale-list">
+			<li ng-repeat="(index, option) in question.options">
+				<span style="background-color: {{colors[index]}}"></span> {{ (question.type == 'free') ? option._id : option.value }}
+			</li>
+			<li ng-if="notAnswerd">
+				<span style="background-color: {{colors[26]}}"></span> N/A
+			</li>
+		</ul>
+		<div class="canvas-holder">
+			<canvas chart-area id="chart-area" width="500" height="500"/>
+		</div>
+	</div>
+</div>

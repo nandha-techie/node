@@ -1,0 +1,58 @@
+<div class="logo">
+	<img src="/assets/images/logo-5.png" alt="Logo"/>
+</div>
+<div class="content">
+	<form class="register-form" name="newLeaderForm" ng-submit="register(newLeaderForm, leader)" novalidate>
+		<h3 class="font-green">Sign Up</h3>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Email</label>
+			<!-- <input type="email" ng-model="leader.email" ng-minlength="9" name="leaderEmailAddr" class="form-control placeholder-no-fix" id="email" placeholder="Email" ng-pattern="emailPattern" required/> -->
+			<input type="email" ng-model="leader.email" ng-minlength="9" name="leaderEmailAddr" class="form-control placeholder-no-fix" id="email" placeholder="Email" required/>
+				<div ng-show="newLeaderForm.leaderEmailAddr.$touched" ng-messages="newLeaderForm.leaderEmailAddr.$error" class="error-text" role="alert">
+					<div ng-message="required">Enter Above Field</div>
+					<div ng-message="minlength">Enter Valid Email</div>
+					<div ng-message="email">Enter Valid Email</div>
+					<div ng-message="pattern">Enter Valid Email</div>
+				</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">First name</label>
+			<input type="text" ng-model="leader.firstname" ng-minlength="3" name="leaderFname" class="form-control placeholder-no-fix" id="fname" placeholder="First name" required/>
+			<div ng-show="newLeaderForm.leaderFname.$touched" ng-messages="newLeaderForm.leaderFname.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="minlength">3 Characters Minimum</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Last name</label>
+			<input type="text" ng-model="leader.lastname" ng-minlength="3" name="leaderLname" class="form-control placeholder-no-fix" id="lname" placeholder="Last name" required/>
+			<div ng-show="newLeaderForm.leaderLname.$touched" ng-messages="newLeaderForm.leaderLname.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="minlength">3 Characters Minimum</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Organisation</label>
+			<input type="text" ng-model="leader.organisation" name="leaderOrg" class="form-control placeholder-no-fix" placeholder="Organisation" />
+			<div ng-show="newLeaderForm.leaderOrg.$touched" ng-messages="newLeaderForm.leaderOrg.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+			</div>
+		</div>
+		<div class="form-group margin-top-20 margin-bottom-20">
+			<label class="check">
+				<input type="checkbox" ng-model="leader.accepted" name="leaderAccept" required /> I agree with the
+				<a href="javascript:;"> Terms of Service </a> & 
+				<a href="javascript:;"> Privacy Policy </a>
+			</label>
+			<div id="register_tnc_error" ng-show="newLeaderForm.leaderAccept.$touched" ng-messages="newLeaderForm.leaderAccept.$error" class="error-text" role="alert">
+				<div ng-message="required">Accept  Terms of Service & Privacy Policy</div>
+			</div>
+		</div>
+		<div>
+			<div class="button-right">
+				<a href="#/login" class="btn uppercase btn-outline no-marimp">Back</a>
+				<button type="submit" class="btn green uppercase">Submit</button>
+			</div>
+		</div>
+	</form>
+</div>

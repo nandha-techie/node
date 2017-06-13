@@ -1,0 +1,125 @@
+@media screen and (max-width: 767px) {
+	.button-right 
+	{
+		button
+		{
+			width: 100%;
+			margin-top: 15px;
+			margin-left: 0;
+		}
+	}
+	
+	.activity-head .navbar-nav > li:last-child
+	{
+		display: none;
+	}
+	.custom-nav-left
+	{
+		>li
+		{
+			display: block !important;
+		}
+	}
+	.activity-head .navbar-nav .open .dropdown-menu
+	{
+		position: static;
+		width: 100%;
+		box-shadow: none;
+	}
+	.page-header.navbar .menu-toggler
+	{
+		opacity: 1;
+	}
+	.dropdown-menu.pull-right
+	{
+		left: 0;
+		right: auto;
+	}
+	.btn-group > .dropdown-menu.pull-right::before, .dropdown-toggle > .dropdown-menu.pull-right::before, .dropdown > .dropdown-menu.pull-right::before
+	{
+		left: 10px;
+		right: auto;
+	}
+	.btn-group > .dropdown-menu.pull-right::after, .dropdown-toggle > .dropdown-menu.pull-right::after, .dropdown > .dropdown-menu.pull-right::after
+	{
+		left: 11px;
+		right: auto;
+	}
+	.box
+	{
+		margin-bottom: 20px;
+	}
+	.switch + .btn-group
+	{
+		margin-top: 10px;
+	}
+	.right-side 
+	{
+		margin: 15px 0 0 0;
+		float: none;
+		>div
+		{
+			margin: 0 0 10px;
+			float: none;
+			text-align: center;
+			.btn
+			{
+				width: 100%;
+			}
+		}
+	}
+	.room-name
+	{
+		padding-left: 15px;
+		text-align: left;
+	}
+	.button-right
+	{
+		float: none;
+		margin-right: 0;
+		button
+		{
+			margin-left: 0 !important;
+		}
+	}
+	.padd0
+	{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}
+ 
+  
+@media screen and (min-width: 768px) and (max-width: 991px){
+	.switch + .btn-group > .btn
+	{
+		font-size: 12px;
+	}
+	 
+}
+@media screen and (min-width: 992px) and (max-width: 1024px){
+	.switch + .btn-group > .btn
+	{
+		font-size: 12px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.doc-list
+	{
+		>.col-lg-3	
+		{
+			width: 230px;
+		}
+	}
+	/*.option-wrap
+	{
+		>div
+		{
+			&.col-md-9
+			{
+				width: 80%;
+			}
+		}
+	}*/
+}

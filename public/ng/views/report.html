@@ -1,0 +1,128 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Rapports & </small> Résultats
+		</h3>
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="portlet tab-left light thin-border">
+					<div class="portlet-title tabbable-line">
+						<ul class="nav nav-tabs col-xs-12 col-sm-4 col-lg-6">
+							<li class="active">
+								<a data-target="#tab_1_1" class="active" data-toggle="tab">Activit&#233;</a>
+							</li>
+							<li>
+								<a data-target="#tab_1_2" data-toggle="tab">Participants</a>
+							</li>
+						</ul>
+					</div>
+					<div class="portlet-body">
+						<!--BEGIN TABS-->
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_1_1">
+								<div class="portlet-body table-responsive padd25">
+									<table class="table table-bordered order-column participant-table" id="sample_1">
+										<thead>
+											<tr>
+												<th>Activity</th>
+												<th>Reports</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="(index, activity) in activities">
+												<td>{{activity.name}}</td>
+												<td>
+													<table class="table table-bordered order-column participant-table layout-fixed">
+														<tr ng-repeat="(key, participantActivity) in activity.participantStatus">
+															<td>Session {{participantActivity.datetime}}</td>
+															<td>
+																<a href="#/report/{{participantActivity._id}}/upload" class="btn btn-icon-only green" ng-if="!participantActivity.signature">
+																	<i class="fa fa-file"></i>
+																</a>
+																<a href="#/report/{{participantActivity._id}}/summary" class="btn btn-icon-only green">
+																	<i class="fa fa-trophy"></i>
+																</a>
+																<a ng-click="deleteReport(participantActivity._id, key, index)" class="btn btn-icon-only red">
+																	<i class="fa fa-times"></i>
+																</a>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											<tr class="text-center" ng-if="activities.length <= 0">
+												<td colspan="9">No Results Found</td>
+											</tr>
+										</tbody>
+									</table>
+									<!-- <div class="row">
+										<ul class="nav nav-pills nav-stacked col-md-2">
+											<li ng-class='{ active: $first }' ng-repeat="(index, activity) in activities">
+												<a data-target="#tab_{{index}}" data-toggle="pill">{{activity.name}}</a>
+											</li>
+										</ul>
+										<div class="tab-content col-md-10">
+											<div ng-class='{ active: $first }' class="tab-pane" id="tab_{{index}}" ng-repeat="(index, activity) in activities">
+												<table class="table table-bordered order-column participant-table">
+													<tr>
+														<th>Session DateTime</th>
+														<th>Actions</th>
+													</tr>
+													<tr ng-repeat="(key, participantActivity) in activity.participantStatus">
+														<td>Session {{participantActivity.datetime}}</td>
+														<td>
+															<a href="#/report/{{participantActivity._id}}/upload" class="btn btn-icon-only green" ng-if="!participantActivity.signature">
+																<i class="fa fa-file"></i>
+															</a>
+															<a href="#/report/{{participantActivity._id}}/summary" class="btn btn-icon-only green">
+																<i class="fa fa-trophy"></i>
+															</a>
+															<a ng-click="deleteReport(participantActivity._id, key, index)" class="btn btn-icon-only red">
+																<i class="fa fa-times"></i>
+															</a>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div> -->
+									<div class="row">
+										<div class="col-md-7 col-sm-7">
+											<div class="row">
+												<form name="limit">
+													<div class="pull-right col-sm-12 col-md-10 col-lg-10 text-right">
+														<div class="custom-pagination">
+															<ul class="pagination" style="visibility: visible;">
+																<li ng-class="(currentPage == 1) ? 'prev disabled' : 'prev'">
+																	<a title="Prev" ng-click="(currentPage != 1) && paginate(pages[currentPage - 2].number)">
+																		<i class="fa fa-angle-left"></i>
+																	</a>
+																</li>
+																<li ng-repeat="(key, page) in pages" ng-class="(currentPage == page.number) ? 'active' : ''"  ng-click="paginate(page.number)">
+																	<a>{{page.number}}</a>
+																</li>
+																<li ng-class="(currentPage == pages[pages.length - 1].number) ? 'next disabled' : 'next'">
+																	<a title="Next" ng-click="(currentPage != pages[pages.length - 1].number) && paginate(pages[currentPage].number)">
+																		<i class="fa fa-angle-right"></i>
+																	</a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="tab_1_2">
+								
+							</div>
+						</div>
+						<!--END TABS-->
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</div>

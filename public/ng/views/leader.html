@@ -1,0 +1,44 @@
+<div class="logo">
+	<img src="/assets/images/logo-5.png" alt="Logo"/>
+</div>
+<div class="content">
+	<form name="leaderForm" ng-submit="login(leaderForm, data)" class="login-form" novalidate>
+		<h3 class="form-title font-green">Sign In</h3>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Email</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="email" placeholder="Email" name="leaderEmail" required ng-model="data.email" /> 
+			<div ng-show="leaderForm.leaderEmail.$touched" ng-messages="leaderForm.leaderEmail.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="email">Enter Valid Email</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Password</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="password" ng-model="data.password" name="leaderPwd" ng-minlength="8" placeholder="Password" name="password" required/>
+			<div ng-show="leaderForm.leaderPwd.$touched" ng-messages="leaderForm.leaderPwd.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="minlength">8 Characters Minimum</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="remember-me">
+				<input type="checkbox" ng-model="data.remember" name="remember" value="1" /> Remember
+			</label>
+		</div>
+		<div class="form-button-group mb50">
+			<div class="button-right">
+				<button type="submit" class="btn green uppercase">Login</button>
+			</div>
+			<div class="forget-pwd">
+				<a href="#/forgetpwd">Forgot Password?</a>
+			</div>
+		</div>
+		<div class="create-account">
+			<p>
+				<a href="#/new_leader" id="register-btn" class="uppercase">Create an account</a>
+			</p>
+		</div>
+	</form>
+	<!-- END LOGIN FORM -->
+</div>

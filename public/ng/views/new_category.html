@@ -1,0 +1,42 @@
+	<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Categories - </small> Nouveau Category
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->							 
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark"></div>
+					</div>
+					<div class="portlet-body padd25">
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="newCategoryForm" ng-submit="create(newCategoryForm, categoryData);" novalidate>
+								<div class="form-group">
+									<label for="categoryName" class="col-sm-2 control-label">
+										Name <span class="mandatory">&#42;</span>
+									</label>
+									<div class="col-sm-6">
+										<input type="text" ng-model="categoryData.name" id="categoryName" name="categoryName" class="form-control" placeholder="Name" required ng-minlength="2" ng-maxlength="25"/>
+										<div ng-show="newCategoryForm.categoryName.$touched" ng-messages="newCategoryForm.categoryName.$error" class="error-text" role="alert">
+											<div ng-message="required">Enter Above Field</div>
+											<div ng-message="minlength">2 Characters Minimum</div>
+											<div ng-message="maxlength">25 Characters Maximum</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-6">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a href="#/preferences" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

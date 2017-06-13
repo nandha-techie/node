@@ -1,0 +1,95 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Dashboard - </small> Profile
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Form edit -->
+				<div class="portlet light thin-border">
+					<div class="portlet-body padd25">
+						<div class="form-wrapper">
+							<form class="form-horizontal h-form" name="profileForm" ng-submit="update(profileForm, authuser)" novalidate>
+								<div class="form-group">
+									<label for="fname" class="col-sm-2 control-label">
+										First Name <span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(profileForm.leaderFname.$error) && profileForm.leaderFname.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="text" ng-model="authuser.firstname" ng-minlength="3" name="leaderFname" class="form-control" id="fname" placeholder="First Name" required/>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="lname" class="col-sm-2 control-label">
+										Last Name <span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(profileForm.leaderLname.$error) && profileForm.leaderLname.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="text" ng-model="authuser.lastname" ng-minlength="3" name="leaderLname" class="form-control" id="lname" placeholder="Last Name" required/>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="email" class="col-sm-2 control-label">
+										E-mail <span class="mandatory">&#42;</span>
+									</label>
+									<div ng-class="(isEmpty(profileForm.leaderEmailAddr.$error) && profileForm.leaderEmailAddr.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="email" ng-model="authuser.email" name="leaderEmailAddr" class="form-control" id="email" placeholder="Email" required/>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-sm-2 control-label">Password</label>
+									<div ng-class="(isEmpty(profileForm.leaderPassword.$error) && profileForm.leaderPassword.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="password" ng-model="authuser.password" name="leaderPassword" class="form-control" id="password" placeholder="Password" ng-minlength="8" ng-maxlength="25" />
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="confirmPwd" class="col-sm-2 control-label">Confirm Password</label>
+									<div ng-class="(isEmpty(profileForm.confirmPwd.$error) && profileForm.confirmPwd.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="password" ng-model="authuser.password_confirmation" name="confirmPwd" class="form-control" id="confirmPwd" placeholder="Password Confirmation" ng-minlength="8" ng-maxlength="25" match="profileForm.leaderPassword" />
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="org" class="col-sm-2 control-label">Organization</label>
+									<div ng-class="(isEmpty(profileForm.leaderOrg.$error) && profileForm.leaderOrg.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<input type="text" ng-model="authuser.organisation" name="leaderOrg" placeholder="Organization" class="form-control" id="org" />
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="lang" class="col-sm-2 control-label">Language</label>
+									<div ng-class="(isEmpty(profileForm.leaderLang.$error) && profileForm.leaderLang.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<select class="form-control" ng-model="authuser.language" name="leaderLang" required>
+											<option value="en">English</option>
+											<option value="fr">French</option>
+										</select>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label for="lang" class="col-sm-2 control-label">Participant Login</label>
+									<div ng-class="(isEmpty(profileForm.participantLogin.$error) && profileForm.participantLogin.$touched) ? 'col-sm-6 has-feedback has-error' : 'col-sm-6 has-feedback'">
+										<select class="form-control" ng-model="authuser.participantLogin" name="participantLogin" required>
+											<option value="0">With Email</option>
+											<option value="1">With Email and PIN</option>
+											<option value="2">With Email and Password</option>
+										</select>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+									</div>
+								</div> -->
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-6">
+										<button type="submit" class="btn green width100">Submit</button>
+										<a href="#/" class="btn default width100">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

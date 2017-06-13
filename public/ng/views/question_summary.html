@@ -1,0 +1,46 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Reports - </small> Question
+		</h3>
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="portlet tab-left light thin-border">
+					<div class="portlet-title tabbable-line">
+						<ul class="nav nav-tabs col-xs-12 col-sm-4 col-lg-6"></ul>
+						<div class="col-xs-12 col-sm-8 col-lg-6">
+							<div class="right-side clearfix">
+								<div class="left">
+									<a href="#/report/{{statusId}}/summary" class="btn uppercase btn-outline">Back</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="tab-content" ng-if="isResult">
+							<div class="tab-pane active">
+								<div class="chart-wrapper">
+									<h2 ng-if="!activity.categoryId">{{question.name}}</h2>
+									<h2 ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h2>
+									<ul class="scale-list">
+										<li ng-repeat="(index, option) in question.options">
+											<span style="background-color: {{ (option.value == 'N/A') ? colors[26] : colors[index] }}"></span> {{ option.value }}
+										</li>
+										<!-- <li ng-if="notAnswerd">
+											<span style="background-color: {{colors[26]}}"></span> N/A
+										</li> -->
+									</ul>
+									<div class="canvas-holder">
+										<canvas chart-area id="chart-area" width="500" height="500"/>
+									</div>
+									<a class="btn btn-outline btn-sm" ng-if="prevQuestion" ng-href="#/report/{{statusId}}/summary/{{prevQuestion._id}}">Previous</a>
+									<a class="btn btn-outline btn-sm" ng-if="nextQuestion" ng-href="#/report/{{statusId}}/summary/{{nextQuestion._id}}">Next</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</div>

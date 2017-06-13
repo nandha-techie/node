@@ -1,0 +1,11 @@
+node_modules/
+public/attachments/
+public/generated/
+public/json/
+public/qrimage/
+public/signature/
+public/uploads/
+public/xml/
+public/unzipqef/
+public/unzipaef/
+public/media/

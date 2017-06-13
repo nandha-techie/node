@@ -1,0 +1,14 @@
+<div class="ngdialog-message">
+	<div>Add Media</div>
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 uploaded-file" ng-repeat="(index, attachment) in attachments">
+			<img sglclick="addMedia(attachment)" class="img-responsive" ng-src="/attachments/thumbnail/{{attachment.file}}" ng-if="attachment.fileType == 'image'">
+			<img sglclick="addMedia(attachment)" class="img-responsive" ng-src="/attachments/{{attachment.file}}" ng-if="attachment.fileType == 'url'">
+			<div ng-dblclick="openDocument(attachment);" sglclick="addMedia(attachment)" class="document" ng-src="{{attachment.path}}" ng-if="attachment.fileType == 'pdf' || attachment.fileType == 'doc' || attachment.fileType == 'ppt' || attachment.fileType == 'zip' || attachment.fileType == 'video'">{{attachment.title}}</div>
+		</div>
+	</div>
+</div>
+<div class="ngdialog-buttons mt">
+	<button ng-click="closeDialog()" class="ngdialog-button ngdialog-button-secondary" type="button">Close</button>
+</div>
+<div class="ngdialog-close"></div>

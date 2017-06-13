@@ -1,0 +1,124 @@
+#!/usr/bin/env node
+
+/**
+* Module dependencies.
+*/
+
+var app = require('../app');
+var debug = require('debug')('xperteam_design:server');
+var http = require('http');
+
+/**
+* Get port from environment and store in Express.
+*/
+process.env.TZ = 'UTC';
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+* Create HTTP server.
+*/
+
+var server = http.createServer(app);
+
+/**
+* Listen on provided port, on all network interfaces.
+*/
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+var io    = require('socket.io')(server),
+usernames = {},
+Models = require('../models'),
+moment = require("moment");
+io.on('connection', function(socket){
+	socket.on('adduser', function(username, room){
+		usernames[username._id] = socket[username._id] = username._id;
+		socket.room = room;
+		socket.join(room);
+		console.log("##########################################");
+		console.log("Connected: " + room);
+		console.log("##########################################");
+	});
+	socket.on('disconnect', function(){
+		if(socket.username){
+			delete usernames[socket.username];
+			socket.leave(socket.room);
+		}
+	});
+	socket.on("updateLogin", function(user){
+		if(user && user.isParticipant){
+			Models.ParticipantLogin.findOne({ participantId: user._id, }).sort('createdAt').exec(function(err, login){
+				if (!err && login){
+					login.lastUpdate = moment.utc().format("YYYY-MM-DDTHH:mm:ss");
+					login.save();
+				}
+			});
+		}
+	});
+	socket.on("getActiveParticipant", function(user){
+		if(user && user.isModerator){
+			var date = moment().subtract(2, "minutes").format("YYYY-MM-DDTHH:mm:ss");
+			Models.ParticipantLogin.remove({ lastUpdate: { $lt: date } });
+			Models.ParticipantLogin.find({ moderatorId: user._id, lastUpdate: { $gte: date } }).exec(function(err, logins){
+				if(!err){
+					socket.emit("ActiveParticipant", logins);
+				}
+			});
+		}
+	});
+});
+app.set("io", io);
+
+/**
+* Normalize a port into a number, string, or false.
+*/
+
+function normalizePort(val){
+	var port = parseInt(val, 10);
+	if (isNaN(port)){
+		// named pipe
+		return val;
+	}
+	if (port >= 0){
+		// port number
+		return port;
+	}
+	return false;
+}
+
+/**
+* Event listener for HTTP server "error" event.
+*/
+
+function onError(error){
+	if (error.syscall !== 'listen'){
+		throw error;
+	}
+	var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+	// handle specific listen errors with friendly messages
+	switch (error.code){
+		case 'EACCES':
+			console.error(bind + ' requires elevated privileges');
+			process.exit(1);
+			break;
+		case 'EADDRINUSE':
+			console.error(bind + ' is already in use');
+			process.exit(1);
+			break;
+		default:
+			throw error;
+	}
+}
+
+/**
+* Event listener for HTTP server "listening" event.
+*/
+
+function onListening(){
+	var addr = server.address();
+	var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+	debug('Listening on ' + bind);
+}

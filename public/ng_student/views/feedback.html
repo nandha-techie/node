@@ -1,0 +1,18 @@
+<div class="ngdialog-message" ng-if="point != 0">
+	<img src="/assets/images/check-image.png"> Correct
+</div>
+<div class="ngdialog-message" ng-if="point == 0">
+	<img src="/assets/images/wrong-image.png"> Incorrect
+</div>
+<div class="ngdialog-content">
+	<h3 class="font20">Question :</h3>
+	<label>{{question.name}}</label>
+</div>
+<div class="ngdialog-content" ng-if="question.feedback">
+	<h3 class="font20">Feedback :</h3>
+	<label>{{question.feedback}}</label>
+</div>
+<div class="ngdialog-buttons mt">
+	<button ng-click="cancelModal();" class="ngdialog-button ngdialog-button-secondary" style="color: #fff;background-color: #d9534f;border-color: #d43f3a;" type="button">Okay</button>
+</div>
+<div class="ngdialog-close"></div>

@@ -1,0 +1,22 @@
+<div class="logo">
+	<img src="/assets/images/logo-5.png" alt="Logo"/>
+</div>
+<div class="content">
+	<form class="forget-form" name="forgotpwdForm" ng-submit="forgetpwd(forgotpwdForm, data)" novalidate>
+		<h3 class="font-green">Forget Password ?</h3>
+		<p> Enter your e-mail address below to reset your password. </p>
+		<div class="form-group">
+			<input class="form-control placeholder-no-fix" type="email" autocomplete="off" placeholder="Email" name="leaderEmail" required ng-model="data.email" />
+			<div ng-show="forgotpwdForm.leaderEmail.$touched" ng-messages="forgotpwdForm.leaderEmail.$error" class="error-text" role="alert">
+				<div ng-message="required">Enter Above Field</div>
+				<div ng-message="email">Enter Valid Email</div>
+			</div>
+		</div>
+		<div>
+			<div class="button-right">
+				<button type="submit" id="register-submit-btn" class="btn green uppercase">Submit</button>
+				<a href="#/login" id="register-back-btn" class="btn uppercase btn-outline">Back</a>
+			</div>
+		</div>
+	</form>
+</div>

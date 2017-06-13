@@ -1,0 +1,120 @@
+body.custom-bg
+{
+	background-color: #26344b;
+}
+.widget-thumb .widget-thumb-body .widget-thumb-body-stat
+{
+	font-size: 40px;
+}
+.widget-thumb .widget-thumb-heading
+{
+	font-size: 16px;
+	text-transform: capitalize;
+	font-weight: 600;
+	margin: 0 0 15px;
+}
+.room-name
+{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	color: #7F7F7F;
+	font-size: 20px;
+	line-height: 30px;
+	margin: 18px 0;
+	>span
+	{
+		font-weight: 400;
+	}
+}
+
+.page-sidebar .page-sidebar-menu > li > a > .title, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > .title
+{
+	margin-top: 17px;
+	font-weight: 400;
+}
+.page-header.navbar .menu-toggler
+{
+	opacity: 0;
+}
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a, .page-sidebar .page-sidebar-menu > li > a
+{
+	border-top: 1px solid #3c5378;
+}
+.date-time
+{
+	>*
+	{
+		font-weight: 700;
+	}
+	>h3
+	{
+		margin: 0 0 20px;
+	}
+	>h1
+	{		
+		margin: 0;
+		font-size: 50px;
+		text-align: right;
+	}
+}
+.min100
+{
+	min-height: 120px;
+	color: #767171;
+}
+.server-info
+{
+	>h3
+	{
+		font-weight: 400;
+		margin: 0 0 15px;
+	}
+	>h4
+	{
+		margin: 0 0 10px;
+	}
+	>button
+	{
+		width: 100px;
+		float: right;
+		padding: 8px 12px;
+	}
+}
+/** 27/4/2016 **/
+/*.option-wrap
+{
+	>div
+	{
+		&.col-md-1
+		{
+			width: 3.33%;
+		}
+	}
+}*/
+.mt35
+{
+	margin-top: 35px;
+}
+
+.has-error
+{
+	 .form-control
+	{
+		border-color: #ed6b75;
+		&:focus
+		{
+			border-color: #a94442;
+		}
+	}
+	.form-control-feedback
+	{
+		display: inline-block !important;
+	}
+}
+.form-horizontal .has-feedback .form-control-feedback
+{
+	top: 10px;
+	color: #ed6b75;
+	display: none;
+}

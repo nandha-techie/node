@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{{title}}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta content="" name="description" />
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"/>
+		{% for file in css %}
+			{% if (file.namespace == "css") %}
+				<link rel="stylesheet" href="{{file.url}}"/>
+			{% endif %}
+		{% endfor %}	
+	</head>
+	<body class="bg">
+		<div class="page-header navbar">
+			<div class="page-header-inner ">
+				<div class="page-logo padd0">
+					<img src="{{siteinfo.logo}}" alt="logo"/> 
+				</div>
+				<div class="page-top">
+					<div class="top-menu">
+						<ul class="date-time-list">
+							<li>{{datetime.date}}</li>
+							<li>{{datetime.time}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="print-wrap">
+			<div class="logo-img">
+				<img src="/assets/images/logo-3.png" alt="logo"/>
+				<span class="print-time">{{datetime.date}} {{datetime.time}}</span>
+			</div>
+		</div>
+
+		<div class="page-container">
+			<div class="qr-wrapper">
+				<ul>
+					<li>
+						<span>1. </span> To join, browse to
+						<a class="text-blue" href="{{url}}">{{url}}</a>
+						<ul class="qr-img">
+							<li>
+								<img src="/qrimage/{{room.qrFile}}"/>
+								<small class="text-sm">Or scan the QR code</small>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<span>2. </span> Enter the Room code
+						<label class="text-blue">{{room.code}}</label>
+					</li>
+					<li>
+						<span>3. </span> Enter your name and the code
+						<label class="text-blue">{{room.pin}}</label>
+					</li>
+				</ul>
+			</div>
+			<p class="footer-text">
+				<!-- Powered by <img src="/assets/images/foot-logo.jpg"/> MobiTeach -->
+
+				Powered by <img src="/assets/images/logo-4.png"/>
+
+			</p>
+		</div>
+		<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+		<script src="/javascripts/moment-with-locales.min.js"></script>
+	</body>
+</html>

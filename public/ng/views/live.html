@@ -1,0 +1,102 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Live & </small> Live Poll
+		</h3>
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="portlet tab-left light thin-border">
+					<div class="portlet-title tabbable-line">
+						<ul class="nav nav-tabs col-xs-12 col-sm-4 col-lg-6">
+							<li class="active"><a data-target="#tab_1_1" data-toggle="tab">Activit&#233;</a></li>
+							<li><a data-target="#tab_1_2" data-toggle="tab">Participants</a></li>
+						</ul>
+						<div class="col-xs-12 col-sm-8 col-lg-6" ng-if="isResult">
+							<div class="right-side clearfix">
+								<div class="left">
+									<ul class="chart-list">
+										<li><a>
+												<i class="fa fa-align-left" aria-hidden="true"></i>
+										</a></li>
+										<li><a class="active">
+											<i class="fa fa-pie-chart" aria-hidden="true"></i>
+										</a></li>
+									</ul>
+								</div>
+								<div class="left">
+									<button  ng-if="activity.start && activity.type == 'polls'" ng-click="updateStatus(activity, !activity.show);" class="btn green uppercase button-md">{{ activity.show === true ? 'Hide' : 'Share' }}</button>
+									<button  ng-if="activity.start && activity.type == 'quiz' && !activity.byParticipant" ng-click="updateQuestion(question, !question.show);" class="btn green uppercase button-md">{{ question.show === true ? 'Hide' : 'Share' }}</button>
+								</div>
+								<div class="left">
+									<button ng-click="stopActivity(activity);" class="btn uppercase btn-outline">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="tab-content"> <!--BEGIN TABS-->
+							<div class="tab-pane active" id="tab_1_1">
+								<div class="" ng-if="activity && isResult">
+									<h2 class="text-center" ng-if="!activity.categoryId">{{question.name}}</h2>
+									<h2 class="text-center" ng-if="activity.categoryId">{{question.name}} ({{activity.categoryId.name}})</h2>
+									<ul class="scale-list text-center">
+										<li ng-repeat="(index, option) in question.options">
+											<!-- <span style="background-color: {{colors[index]}}"></span> {{ (question.type == 'free' || question.type == 'blank') ? option.answer : option.value }} -->
+											<span style="background-color: {{colors[index]}}"></span> {{ (question.type == 'free' || question.type == 'blank') ? option._id : option.value }}
+										</li>
+										<li ng-if="notAnswerd">
+											<span style="background-color: {{colors[26]}}"></span> N/A
+										</li>
+									</ul>
+									<div class="row">
+										<div class="col-md-3 col-sm-3" ng-repeat="(index, media) in question.media">
+											<img ng-dblclick="openDocument(media.attachment);" ng-src="/attachments/thumbnail/{{media.attachment.file}}" ng-if="media.attachment.fileType == 'image'" />
+											<embed-video data-ng-href="{{media.attachment.url}}" controls="0" width="100%" height="100%" ng-if="media.attachment.fileType == 'url'">
+												<a ng-href="{{media.attachment.url}}">Watch</a>
+											</embed-video>
+											<embed ng-src="{{media.attachment.path}}" width="100%" height="50%" ng-if="media.attachment.fileType == 'pdf'" controls="0"></embed>
+											<div class="document" ng-dblclick="openDocument(media.attachment);" ng-src="{{media.attachment.path}}" ng-if="media.attachment.fileType == 'doc' || media.attachment.fileType == 'ppt' || media.attachment.fileType == 'zip'">{{media.attachment.title}}</div>
+											<div ng-if="media.attachment.fileType == 'video'" ng-init="config = getAttachment(media.attachment);">
+												<div class="videogular-container">
+													<videogular vg-theme="config.theme">
+														<vg-media vg-src="config.sources"></vg-media>
+											 			<vg-controls>
+															<vg-play-pause-button></vg-play-pause-button>
+															<!-- <vg-time-display>{{ currentTime | date: 'mm:ss' }}</vg-time-display> -->
+															<vg-scrub-bar>
+																<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+															</vg-scrub-bar>
+															<!-- <vg-time-display>{{ timeLeft | date: 'mm:ss' }}</vg-time-display> -->
+															<vg-volume>
+																<vg-mute-button></vg-mute-button>
+																<vg-volume-bar></vg-volume-bar>
+															</vg-volume>
+															<vg-fullscreen-button></vg-fullscreen-button>
+														</vg-controls>
+														<vg-overlay-play></vg-overlay-play>
+													</videogular>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="canvas-holder">
+										<canvas chart-area id="chart-area" width="500" height="500"/>
+									</div>
+									<div class="text-center">
+										<a class="btn btn-outline btn-sm" ng-if="prevQuestion" ng-href="#/activity/{{prevQuestion.activityId}}/question/{{prevQuestion._id}}">Previous</a>
+										<a class="btn btn-outline btn-sm" ng-if="nextQuestion" ng-href="#/activity/{{nextQuestion.activityId}}/question/{{nextQuestion._id}}">Next</a>
+									</div>
+									<!-- <h3><span>8</span>/12 voted</h3> -->
+								</div>
+								<div class="chart-wrapper" ng-if="!activity">No Active Activit&#233; Found</div>
+							</div>
+							<div class="tab-pane" id="tab_1_2">
+								<div class="chart-wrapper">No Active Participant Found</div>
+							</div>
+						</div> <!--END TABS-->
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</div>

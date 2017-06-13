@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{{siteinfo.title}} - Home</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta content="" name="description" />
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+		{% for file in css %}
+			{% if (file.namespace == "css") %}
+				<link rel="stylesheet" href="{{file.url}}"/>
+			{% endif %}
+		{% endfor %}
+	</head>
+	<body class=" login">
+		<div class="logo">
+			<img src="assets/images/logo-5.png" alt="Logo"/>
+		</div>
+		<div class="content">
+			<div class="button-group">
+				<a href="/participant" class="btn green uppercase">Student Login</a>
+				<a href="/moderator" class="btn green uppercase">Leader Login</a>
+			</div>
+		</div>
+		<div class="copyright">{{year}} © {{siteinfo.title}} - WBT Digital Training - V {{version.number}} {{version.formatDate}}</div>
+	</body>
+</html>

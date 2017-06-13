@@ -1,0 +1,264 @@
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<h3 class="page-title">
+			<small>Bibliothèque </small>
+		</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light thin-border">
+					<div class="portlet-title">
+						<div class="caption font-dark">
+							<div class="btn-group">
+								<a class="btn btn-sm green btn-outline btn-circle btn-small" href="javascript:;" data-toggle="dropdown" submenu="top" data-close-others="true">
+									<i class="fa fa-plus"></i> New <i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu pull-right">
+									<li>
+										<a href="#/library/folder/new">Dossier</a>
+									</li>
+									<li>
+										<a href="#/library/quiz/new">Quiz</a>
+									</li>
+									<li class="dropdown-submenu">
+										<a href="javascript:;" data-toggle="dropdown">Vote</a>
+										<ul class="dropdown-menu">
+											<li><a href="#/library/poll/truefalse/create">True False</a></li>
+											<li><a href="#/library/poll/free/create">Short Answer</a></li>
+											<li><a href="#/library/poll/single/create">Réponse unique</a></li>
+											<li><a href="#/library/poll/multiple/create">Réponses multiples</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="#/library/attachment/new">Document</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group">
+								<a class="btn btn-sm blue btn-outline btn-circle btn-small" href="javascript:;" data-toggle="dropdown" data-close-others="true"> Filter By
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<div class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+									<label>
+										<input type="checkbox" ng-model="checkbox1" name="checkbox1" ng-change="updateLibraries(checkbox1, checkbox2, checkbox3, checkbox4);" /> Dossier
+									</label>
+									<label>
+										<input type="checkbox" ng-model="checkbox2" name="checkbox2" ng-change="updateLibraries(checkbox1, checkbox2, checkbox3, checkbox4);" /> Quiz
+									</label>
+									<label>
+										<input type="checkbox" ng-model="checkbox3" name="checkbox3" ng-change="updateLibraries(checkbox1, checkbox2, checkbox3, checkbox4);" /> Vote
+									</label>
+									<label>
+										<input type="checkbox" ng-model="checkbox4" name="checkbox4" ng-change="updateLibraries(checkbox1, checkbox2, checkbox3, checkbox4);" /> Document
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="portlet-body padd25">
+						<div class="row doc-list">
+							<div class="col-sm-4 col-md-4 col-lg-3" ng-repeat="(index, file) in files" elem-ready="ready = true;">
+								<div class="box gray-bg uploaded-file" ng-if="file.type == 'folder'" ng-dblclick="gotoFolder(file);">
+									<span class="icon-folder"></span>
+									<label>{{file.name}}</label>
+									<div class="dropdown cog-icon">
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+											<span class="icon-settings"></span>
+										</a>
+										<ul class="dropdown-menu dropdown-menu-default">
+											<li>
+												<a ng-click="deleteFolder(index, file);">
+													<i class="icon-trash"></i> Delete
+												</a>
+											</li>
+											<li>
+												<a ng-click="gotoFolder(file);">
+													<i class="icon-magnifier"></i> View
+												</a>
+											</li>
+											<li>
+												<a href="#/library/folder/{{file._id}}/edit">
+													<i class="icon-note"></i> Edit
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="box uploaded-file gray-bg" ng-if="file.type == 'survey'">
+									<span class="check">
+										<img src="/assets/images/success-check.png"/>
+									</span>
+									<label>Evaluation de stage</label>
+									<p class="name survey">Survey</p>
+									<div class="dropdown cog-icon">
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+											<span class="icon-settings"></span>
+										</a>
+										<ul class="dropdown-menu dropdown-menu-default">
+											<li>
+												<a href="page_user_profile_1.html">
+													<i class="icon-user"></i> My Profile
+												</a>
+											</li>
+											<li>
+												<a href="app_calendar.html">
+													<i class="icon-calendar"></i> My Calendar
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- <div class="box uploaded-file gray-bg" ng-if="file.type == 'document' || file.type == 'url'" ng-dblclick="viewDocument(file);">
+									<span class="icon-folder dummy"></span>
+									<label>{{file.name}}</label>
+									<p class="name url" ng-if="file.type == 'url'">URL</p>
+									<p class="name document" ng-if="file.type != 'url'">Document</p> -->
+								<div class="box uploaded-file gray-bg" ng-if="file.type == 'document'" ng-dblclick="viewDocument(file);">
+									<span class="icon-folder dummy"></span>
+									<label>{{file.name}}</label>
+									<p class="name document">Document</p>
+									<div class="dropdown cog-icon">
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+											<span class="icon-settings"></span>
+										</a>
+										<ul class="dropdown-menu dropdown-menu-default">
+											<li>
+												<a ng-click="deleteAttachment(index, file);">
+													<i class="icon-trash"></i> Delete
+												</a>
+											</li>
+											<li>
+												<a ng-click="viewDocument(file);">
+													<i class="icon-magnifier"></i> View
+												</a>
+											</li>
+											<li ng-if="file.attachment.fileType == 'image'">
+												<a href="#/library/image/{{file._id}}/addsensible">
+													<i class="icon-plus"></i> Add Sensible Zone
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="box uploaded-file gray-bg" ng-if="file.type == 'polls'" ng-dblclick="gotoPoll(file);">
+									<span class="icon-folder dummy" ng-if="!file.start"></span>
+									<span class="check" ng-if="file.start"><img src="/assets/images/success-check.png"></span>
+									<label>{{file.name}}</label>
+									<p class="name poll">Poll</p>
+									<div class="dropdown cog-icon">
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" submenu data-close-others="true">
+											<span class="icon-settings"></span>
+										</a>
+										<ul class="dropdown-menu dropdown-menu-default">
+											<li><a ng-click="deletePoll(index, file);"><i class="icon-trash"></i> Delete</a></li>
+											<li><a ng-click="gotoPoll(file);"><i class="fa fa-edit"></i> Edit</a></li>
+											<li ng-if="file.start">
+												<a ng-click="stopActivity(file, index);">
+													<i class="fa fa-stop"></i> Stop
+	 											</a>
+											</li>
+											<li ng-if="!file.start">
+												<a ng-click="startActivity(file, index, true, false, false);">
+													<i class="fa fa-play"></i> Start
+	 											</a>
+											</li>
+											<li class="dropdown-submenu">
+												<a href="javascript:;" data-toggle="dropdown">
+													<i class="fa fa-download"></i> Export
+												</a>
+												<ul class="dropdown-menu">
+													<li>
+														<a ng-click="export(file, 'xml');">XML</a>
+			 											<a ng-click="export(file, 'csv');">CSV</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="box uploaded-file gray-bg" ng-if="file.type == 'quiz'" ng-dblclick="gotoQuiz(file);">
+									<span class="icon-folder dummy" ng-if="!file.start"></span>
+									<span class="check" ng-if="file.start"><img src="/assets/images/success-check.png"></span>
+									<label>{{file.name}}</label>
+									<p class="name quiz">Quiz</p>
+									<div class="dropdown cog-icon">
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" submenu data-close-others="true">
+											<span class="icon-settings"></span>
+										</a>
+										<ul class="dropdown-menu dropdown-menu-default">
+											<li><a ng-click="deleteQuiz(index, file);"><i class="icon-trash"></i> Delete</a></li>
+											<li><a ng-click="gotoQuiz(file);"><i class="fa fa-edit"></i> Edit</a></li>
+											<li ng-if="file.start">
+												<a ng-click="stopActivity(file, index);">
+													<i class="fa fa-stop"></i> Stop
+	 											</a>
+											</li>
+											<li class="dropdown-submenu" ng-if="!file.start">
+												<a href="javascript:;" data-toggle="dropdown">
+													<i class="fa fa-play"></i> Start
+												</a>
+												<ul class="dropdown-menu">
+													<li class="dropdown-submenu">
+														<a href="javascript:;" data-toggle="dropdown">Led by the learner with feedback</a>
+														<ul class="dropdown-menu">
+															<li><a ng-click="startActivity(file, index, true, true, true);">Randomize</a></li>
+															<li><a ng-click="startActivity(file, index, true, true, false);">Ordered</a></li>
+														</ul>
+													</li>
+													<li class="dropdown-submenu">
+														<a href="javascript:;" data-toggle="dropdown">Led by the learner without feedback</a>
+														<ul class="dropdown-menu">
+															<li><a ng-click="startActivity(file, index, true, false, true);">Randomize</a></li>
+															<li><a ng-click="startActivity(file, index, true, false, false);">Ordered</a></li>
+														</ul>
+													</li>
+													<li><a ng-click="startActivity(file, index, false, true, false);">Led by the facilitator with feedback</a></li>
+													<li><a ng-click="startActivity(file, index, false, false, false);">Led by the facilitator without feedback</a></li>
+												</ul>
+											</li>
+											<li class="dropdown-submenu">
+												<a href="javascript:;" data-toggle="dropdown">
+													<i class="fa fa-download"></i> Export
+												</a>
+												<ul class="dropdown-menu">
+													<li>
+														<a ng-click="export(file, 'xml');">XML</a>
+			 											<a ng-click="export(file, 'csv');">CSV</a>
+													</li>
+													<!-- <li class="dropdown-submenu">
+														<a href="javascript:;" data-toggle="dropdown">Led by the learner with feedback</a>
+														<ul class="dropdown-menu">
+															<li><a ng-click="startActivity(file, index, true, true, true);">Randomize</a></li>
+															<li><a ng-click="startActivity(file, index, true, true, false);">Ordered</a></li>
+														</ul>
+													</li>
+													<li class="dropdown-submenu">
+														<a href="javascript:;" data-toggle="dropdown">Led by the learner without feedback</a>
+														<ul class="dropdown-menu">
+															<li><a ng-click="startActivity(file, index, true, false, true);">Randomize</a></li>
+															<li><a ng-click="startActivity(file, index, true, false, false);">Ordered</a></li>
+														</ul>
+													</li>
+													<li><a ng-click="startActivity(file, index, false, true, false);">Led by the facilitator with feedback</a></li>
+													<li><a ng-click="startActivity(file, index, false, false, false);">Led by the facilitator without feedback</a></li> -->
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4 col-md-4 col-lg-3">
+								<div class="box">
+									<div class="file-upload">
+										<button class="btn green" type="button" ng-click="ImportAEF()">Ajouter</button>
+										<span>Importer</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h4 class="file-count">{{files.length}} Items</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
